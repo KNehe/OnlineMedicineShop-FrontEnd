@@ -1,0 +1,22 @@
+.invalid-input{
+    color:red;
+    margin-left: 35px;
+}
+.form{
+    margin-top: 30px;
+    padding: 10px !important;
+}
+
+.btn, .btn-primary{
+    color: white !important;
+    background-color: black !important;
+    width: 50% !important;
+    font-family: 'Lucida Sans';
+}
+h4{
+    font-family: 'Lucida Sans';
+    font-weight: bold;
+    text-align: center;
+    text-decoration: rgb(31, 30, 30);
+    padding: 10px;
+}

@@ -1,0 +1,29 @@
+.formh{
+    margin-top:120px !important;
+    margin-bottom:200px !important;
+   }
+   
+   .form{ 
+       padding: 10px !important;
+   }
+   
+   .btn-primary
+   {
+       background-color:  rgb(8,8,8) !important ;
+       margin-top: 10px !important;
+       margin-bottom:  1px !important;
+       width: 100%;
+   }
+   
+   .fa{
+       color: rgb(8,8,8) !important;
+   }
+   
+   .form-control{
+   border-bottom: 1px solid rgb(58, 54, 54) !important;
+   }
+   
+   .invalid-input{
+       color:red;
+       margin-left: 35px;
+   }

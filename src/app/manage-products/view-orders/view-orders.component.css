@@ -1,0 +1,15 @@
+table{
+    width: 100%;
+}
+h4{
+    font-family: 'Lucida Sans';
+    font-weight: bold;
+    text-align: center;
+    text-decoration: rgb(31, 30, 30);
+    padding: 10px;
+    text-transform: uppercase;
+}
+.search-input{
+    width: 50% !important;
+    margin-left: 100px !important;
+}

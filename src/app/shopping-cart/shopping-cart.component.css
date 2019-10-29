@@ -1,0 +1,40 @@
+.left-div{
+    flex-grow: 8;
+}
+.right-div{
+    flex-grow: 5;
+}
+.mycontainer
+{
+display: flex;
+flex-wrap: wrap;
+}
+
+#shopping-cart-title{
+    padding: 5px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: black;
+    color: aliceblue;
+}
+.cart-text{
+    padding: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.btn-change{
+    color:white !important;
+    background-color: red !important;
+}
+#make_payment-title{
+    padding: 5px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: rgb(78, 8, 8);
+    color: aliceblue;
+    margin-top: 20px;
+}
+.credit_card_form{
+    padding: 3px;
+}
+
+

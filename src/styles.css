@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './environments/styles/css/bootstrap.min.css';
+@import './environments/styles/css/bootstrap.min.css';
+@import './environments/styles/css/mdb.min.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+
+
+
+
+
+html, body { height: 100%;}
+html, body { margin: 0; padding: 0; }

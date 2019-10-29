@@ -1,0 +1,13 @@
+h4{
+    font-family: 'Lucida Sans';
+    font-weight: bold;
+    text-align: center;
+    text-decoration: rgb(31, 30, 30);
+    padding: 10px;
+}
+.card-title{
+font-weight: 1000 !important;
+}
+.card-text{
+font-weight: 800 !important;
+}

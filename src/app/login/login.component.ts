@@ -1,0 +1,108 @@
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { AuthenticationService } from '../Services/authentication.service';
+import { LoginViewModel } from '../models/login-view-model';
+import { Router } from '@angular/router';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
+
+
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+  
+  ///font awesome icon
+  faUserCircle = faUserCircle
+  
+  model:LoginModel={
+  username:'',
+  password:'' 
+  }
+
+  loginViewModel:LoginViewModel;
+  
+  errorMessage = null;
+
+
+  constructor(private authService:AuthenticationService,
+              private router:Router) { }
+
+  ngOnInit() {
+      //when a user clicks log out
+      //navigate here
+      //remove all auth variables
+      if(this.router.url === "/logout")
+      {
+         this.authService.removeSessionVariable()
+         //used to show appropiate links on navbar
+         //show register/login and hide logout
+         this.authService.changeStatus(false)
+         return this.router.navigate(["/login"],{skipLocationChange:true})
+      }   
+    
+  }
+  
+  //login user
+  login(){
+    this.authService.authenticate(this.model).subscribe(
+      res=>{
+    
+        let responseToJson = JSON.stringify(res)
+
+        let authToken  = JSON.parse(responseToJson).token
+
+        sessionStorage.setItem("authToken",authToken); 
+
+        this.loadPage()
+       },
+       
+      err=>{
+        this.errorMessage = "Invalid Credentials"
+      }
+     );
+  }//login
+
+  //loadpage according to user role
+  loadPage()
+  {   
+       
+       this.authService.getUserDetails().subscribe(
+         res=>{
+
+           this.loginViewModel = res;
+          
+           let userid = JSON.stringify(res.id);
+
+           sessionStorage.setItem("userid",userid);
+           sessionStorage.setItem("role",res.role);
+           sessionStorage.setItem("FirstName",res.firstname);
+
+           if(res.role == "ADMIN")
+           {
+            this.router.navigate(["/manageproducts"],{skipLocationChange: true});
+           }else if (res.role == "User")
+           {
+            this.router.navigate(["/shoppingcart"],{skipLocationChange:true})
+           }
+           //used to show appropiate links on navbar
+           //hide register/login and show logout
+           this.authService.changeStatus(true)
+         },
+         err=>{
+           this.errorMessage = "An error occured Try again!";
+         }
+       );
+  }//load page
+
+} 
+
+//loginModel
+export interface LoginModel
+{
+  username:string;
+  password:string;
+}
+
