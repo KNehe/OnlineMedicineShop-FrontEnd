@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { AppModule } from '../app.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,7 +13,9 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [ RegisterComponent, FaIconComponent],
+      providers: [AppModule],
+      imports:[FormsModule,HttpClientModule,RouterModule.forRoot([])]
     })
     .compileComponents();
   }));

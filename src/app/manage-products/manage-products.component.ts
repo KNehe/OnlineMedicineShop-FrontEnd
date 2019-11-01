@@ -15,10 +15,10 @@ export class ManageProductsComponent implements OnInit {
 
   ngOnInit() {
     //check if user is logged in and is an admin
-    if( !this.authService.checkLogin()  && this.authService.checkRole() != "Admin")
+   /* if( !this.authService.checkLogin()  && this.authService.checkRole() != "Admin")
     {
       return this.router.navigate(["/login"],{skipLocationChange:true})
-    }
+    }*/
     //used to show appropiate links on navbar -even after page refresh
    //hide register/login and show logout
     this.authService.changeStatus(true)
