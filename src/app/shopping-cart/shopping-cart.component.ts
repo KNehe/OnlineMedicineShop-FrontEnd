@@ -47,18 +47,12 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
-    //check if a user has logged in
-    if(this.authService.checkLogin())
-    {
-      this.getAllProducts()
+    
+    this.getAllProducts()
     //used to show appropiate links on navbar -even after page refresh
     //hide register/login and show logout
     this.authService.changeStatus(true)
-    }
-    else
-    {
-     this.router.navigate(["/login"],{skipLocationChange:true});
-    }   
+     
   }//init
 
 

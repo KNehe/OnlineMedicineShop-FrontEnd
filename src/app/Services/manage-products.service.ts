@@ -22,7 +22,7 @@ export class ManageProductsService {
   addProduct(product:Product,file:File) :Observable<any>
   {   
       const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + sessionStorage.getItem("authToken"),
+      Authorization: 'Bearer ' + localStorage.getItem("authToken"),
       ProductId : ''+0,//to avoid null in backend
       ProductName: '' + product.name,
       ProductPrice: ''+product.price,
@@ -39,7 +39,7 @@ export class ManageProductsService {
   //get all products
   getAllProducts() : Observable<Product[]> {
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + sessionStorage.getItem("authToken")})
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
 
      return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts",{headers});
   }
@@ -47,7 +47,7 @@ export class ManageProductsService {
   //delete a product
   deleteProduct(id:number) : Observable<String> {
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + sessionStorage.getItem("authToken")})
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
 
      return this.httpClient.delete<String>(this.base_url+"/api/deleteProduct/"+id,{headers});
   }
@@ -57,7 +57,7 @@ export class ManageProductsService {
     editProduct1(product:Product,file:File) :Observable<any>
     {
         const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + sessionStorage.getItem("authToken"),
+        Authorization: 'Bearer ' + localStorage.getItem("authToken"),
         ProductId: '' + product.id,
         ProductName: '' + product.name,
         ProductPrice: ''+product.price,
@@ -76,7 +76,7 @@ export class ManageProductsService {
     editProduct2(product:Product) :Observable<any>
     {
         const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + sessionStorage.getItem("authToken")
+        Authorization: 'Bearer ' + localStorage.getItem("authToken")
       })
 
   
@@ -88,7 +88,7 @@ export class ManageProductsService {
     sendPurchase(purchase:Purchase) : Observable<any>
     {
           const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + sessionStorage.getItem("authToken")
+        Authorization: 'Bearer ' + localStorage.getItem("authToken")
       })
 
       
@@ -99,7 +99,7 @@ export class ManageProductsService {
      getAllPurchases() : Observable<Purchase[]>
      {
            const headers = new HttpHeaders({
-         Authorization: 'Bearer ' + sessionStorage.getItem("authToken")
+         Authorization: 'Bearer ' + localStorage.getItem("authToken")
        })
  
        return this.httpClient.get<Purchase[]>(this.base_url+"/api/getAllPurchases",{headers});

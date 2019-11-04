@@ -24,6 +24,10 @@ import { EditDialogComponent } from './manage-products/edit-dialog/edit-dialog.c
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RegisterComponent } from './register/register.component';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import { GuardGuard } from './Guards/guard.guard';
+import { ShoppingCartGuardGuard } from './Guards/shopping-cart-guard.guard';
+import { AuthenticationService } from './Services/authentication.service';
+import { DeactivateGuard } from './Guards/deactivate.guard';
 
 
 
@@ -36,6 +40,8 @@ const appRoutes:Routes = [
 {
   path:'manageproducts',
   component:ManageProductsComponent,
+  canActivate:[GuardGuard],
+  data:{expectedRole:"ADMIN"},
   children:[
     {
       path:'',
@@ -62,15 +68,19 @@ const appRoutes:Routes = [
 },
 {
 path:'register',
-component:RegisterComponent
+component:RegisterComponent,
+canActivate:[DeactivateGuard]
 },
 {
   path:'login',
-  component:LoginComponent
+  component:LoginComponent,
+  canActivate:[DeactivateGuard]
 },
 {
   path:'shoppingcart',
-  component:ShoppingCartComponent
+  component:ShoppingCartComponent,
+  canActivate:[ShoppingCartGuardGuard],
+  data:{expectedRole:"USER"}
 },
 {
   path:'logout',
@@ -125,7 +135,7 @@ component:RegisterComponent
     FontAwesomeModule
 
   ],
-  providers: [],
+  providers: [AuthenticationService, GuardGuard, ShoppingCartGuardGuard],
   bootstrap: [AppComponent],
   entryComponents:[DialogComponent,EditDialogComponent],
   

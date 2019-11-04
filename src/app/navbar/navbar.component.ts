@@ -10,29 +10,18 @@ import { AuthenticationService } from '../Services/authentication.service';
 })
 export class NavbarComponent implements OnInit {
   
-  constructor(private authService:AuthenticationService) { 
+  constructor(private authService:AuthenticationService) { }
 
-
-  }
-
- 
   
   //set to false when user logs in
-  //used in view
+  //to hide register and login links
+  //but show log out link
   loggedIn = null
-
-  //user's firstName
-  firstName:string = null
-
  
   ngOnInit() {
-    this.authService.currentStatus.subscribe( status => this.loggedIn = status)
-    if(this.loggedIn === true)
-    {
-      this.firstName = sessionStorage.getItem("FirstName")
-    }
 
-     
+    this.authService.currentStatus.subscribe( status => this.loggedIn = status)
+         
   }
 
 }

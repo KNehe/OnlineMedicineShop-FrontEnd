@@ -33,15 +33,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
       //when a user clicks log out
       //navigate here
-      //remove all auth variables
+      //remove all local storage variables
       if(this.router.url === "/logout")
       {
          this.authService.removeSessionVariable()
          //used to show appropiate links on navbar
-         //show register/login and hide logout
+         //show register & login links, hide logout link
          this.authService.changeStatus(false)
          return this.router.navigate(["/login"],{skipLocationChange:true})
-      }   
+      }  
     
   }
   
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
         let authToken  = JSON.parse(responseToJson).token
 
-        sessionStorage.setItem("authToken",authToken); 
+        localStorage.setItem("authToken",authToken); 
 
         this.loadPage()
        },
@@ -76,26 +76,28 @@ export class LoginComponent implements OnInit {
           
            let userid = JSON.stringify(res.id);
 
-           sessionStorage.setItem("userid",userid);
-           sessionStorage.setItem("role",res.role);
-           sessionStorage.setItem("FirstName",res.firstname);
+           localStorage.setItem("userid",userid);
+           localStorage.setItem("role",res.role);
+           localStorage.setItem("FirstName",res.firstname);
+           
 
            if(res.role == "ADMIN")
            {
             this.router.navigate(["/manageproducts"],{skipLocationChange: true});
-           }else if (res.role == "User")
+
+           }
+           else if (res.role == "USER")
            {
             this.router.navigate(["/shoppingcart"],{skipLocationChange:true})
            }
-           //used to show appropiate links on navbar
-           //hide register/login and show logout
-           this.authService.changeStatus(true)
+         
          },
          err=>{
            this.errorMessage = "An error occured Try again!";
          }
        );
   }//load page
+
 
 } 
 

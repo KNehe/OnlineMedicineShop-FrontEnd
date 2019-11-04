@@ -32,7 +32,7 @@ export class AuthenticationService {
   getUserDetails() : Observable<LoginViewModel>
   {
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + sessionStorage.getItem("authToken")
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")
     });
   
     return this.httpClient.get<LoginViewModel>(this.base_url+"/api/getDetails",{headers});
@@ -40,9 +40,9 @@ export class AuthenticationService {
   }
 
   //checkLogin
-  checkLogin():Boolean
+  checkLogin():boolean
   {
-    if(sessionStorage.getItem("userid") === null  &&  sessionStorage.getItem("role") === null)
+    if(localStorage.getItem("userid") === null  &&  localStorage.getItem("role") === null)
     {
       return false
     }
@@ -52,28 +52,30 @@ export class AuthenticationService {
   //checkRole
   checkRole() : String
   {
-    if(sessionStorage.getItem("role") == "ADMIN")
+    if(localStorage.getItem("role") == "ADMIN")
+    {  
+      
+      return "ADMIN"
+    }else if(localStorage.getItem("role") == "USER")
     {
-      return "Admin"
-    }else if(sessionStorage.getItem("role") == "User")
-    {
-      return "User"
+      return "USER"
     }
   }
 
 
   removeSessionVariable()
   { 
-    sessionStorage.clear()
+    localStorage.clear()
   }
 
   
-  //--will be used to display apropiate links buttons on the navabar
+  //--will be used to display apropiate links buttons on the navbar
   //because there's no child/parent relationship between navbar and other components
   private messageSource = new BehaviorSubject(false)
   currentStatus = this.messageSource.asObservable()
 
-  //change the above status
+  //used to change the above status
+  //implemented in the Login and NavBar component inside ngOnInit()
   changeStatus(status:boolean)
   {
     this.messageSource.next(status)
@@ -90,10 +92,8 @@ export class AuthenticationService {
   changePassword(model:ChangePasswordModel):Observable<string>
   {
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + sessionStorage.getItem("authToken")
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")
     })
-
-   
     return this.httpClient.post<string>(this.base_url+"/api/changePassword",model,{headers}
     );
   }
