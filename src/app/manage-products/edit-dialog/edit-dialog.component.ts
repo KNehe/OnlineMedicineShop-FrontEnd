@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Product } from '../../models/product';
 import { ManageProductsService } from '../../Services/manage-products.service';
+import { AllProductsComponent } from '../all-products/all-products.component';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -20,7 +21,8 @@ export class EditDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
              public dialogRef:MatDialogRef<EditDialogComponent>,
-             private service:ManageProductsService) 
+             private service:ManageProductsService,
+             private allProductComponent:AllProductsComponent) 
              { 
                this.model.id = data.product.id
                this.model.name = data.product.name

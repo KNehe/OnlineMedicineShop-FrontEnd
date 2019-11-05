@@ -11,7 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AllProductsComponent } from './manage-products/all-products/all-products.component';
 import { ViewOrdersComponent } from './manage-products/view-orders/view-orders.component';
 import { SettingsComponent } from './manage-products/settings/settings.component';
@@ -135,7 +135,11 @@ canActivate:[DeactivateGuard]
     FontAwesomeModule
 
   ],
-  providers: [AuthenticationService, GuardGuard, ShoppingCartGuardGuard],
+  providers: [
+    AuthenticationService,
+     GuardGuard, 
+     ShoppingCartGuardGuard
+    ],
   bootstrap: [AppComponent],
   entryComponents:[DialogComponent,EditDialogComponent],
   

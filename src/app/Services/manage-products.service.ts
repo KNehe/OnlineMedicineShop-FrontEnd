@@ -23,10 +23,10 @@ export class ManageProductsService {
   {   
       const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem("authToken"),
-      ProductId : ''+0,//to avoid null in backend
+      ProductId : ''+0,
       ProductName: '' + product.name,
       ProductPrice: ''+product.price,
-      ProductUser: ''+product.user.id
+      AddedBy: ''+product.user.id
     })
 
       let formData = new FormData();
@@ -37,15 +37,19 @@ export class ManageProductsService {
   }
 
   //get all products
-  getAllProducts() : Observable<Product[]> {
+  getAllProducts() : Observable<Product[]>
+   {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-
+    
      return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts",{headers});
-  }
+
+     
+   }
 
   //delete a product
-  deleteProduct(id:number) : Observable<String> {
+  deleteProduct(id:number) : Observable<String> 
+  {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem("authToken")})
 
@@ -54,18 +58,20 @@ export class ManageProductsService {
 
     //edit product
     //takes a file
-    editProduct1(product:Product,file:File) :Observable<any>
-    {
+  editProduct1(product:Product,file:File) :Observable<any>
+    {   
+     
         const headers = new HttpHeaders({
         Authorization: 'Bearer ' + localStorage.getItem("authToken"),
         ProductId: '' + product.id,
         ProductName: '' + product.name,
         ProductPrice: ''+product.price,
-        ProductUser: ''+product.user.id
+        AddedBy: ''+product.user.id
       })
 
         let formData = new FormData();
         formData.append("file",file);
+        console.log(headers);
   
       return this.httpClient.post<any>(this.base_url+"/api/editProduct1",formData,{headers});
       
@@ -74,34 +80,28 @@ export class ManageProductsService {
     //editproduct
     //takes only a product,file is included as bytes in the product Object
     editProduct2(product:Product) :Observable<any>
-    {
-        const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")
-      })
-
-  
+    {  
+      const headers = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem("authToken")})
       return this.httpClient.post<any>(this.base_url+"/api/editProduct2",product,{headers});
       
     }
 
     //send purchased items to backend
     sendPurchase(purchase:Purchase) : Observable<any>
-    {
-          const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")
-      })
+    {   
+      const headers = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem("authToken")})
 
-      
       return this.httpClient.post<any>(this.base_url+"/api/purchase",purchase,{headers});
     }
 
      //get purchased items to backend
      getAllPurchases() : Observable<Purchase[]>
      {
-           const headers = new HttpHeaders({
-         Authorization: 'Bearer ' + localStorage.getItem("authToken")
-       })
- 
+      const headers = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem("authToken")})
+
        return this.httpClient.get<Purchase[]>(this.base_url+"/api/getAllPurchases",{headers});
      }
   

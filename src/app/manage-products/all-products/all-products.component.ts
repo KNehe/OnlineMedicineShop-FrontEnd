@@ -22,7 +22,7 @@ export class AllProductsComponent implements OnInit {
   //products
   products:Product[] = [];
 
-  filterProducts:Product[] = []
+  filteredProducts:Product[] = []
 
   //length- for mat-paginator
   length:number
@@ -42,7 +42,7 @@ export class AllProductsComponent implements OnInit {
   //pagination
   onPaginateChange(data)
   {
-   this.filterProducts = this.products.slice(0,data.pageSize)
+   this.filteredProducts = this.products.slice(0,data.pageSize)
   }
 
   //get all Products
@@ -53,7 +53,7 @@ export class AllProductsComponent implements OnInit {
       res=>{
        this.products = res;
        this.length = this.products.length //paginator record length
-       this.filterProducts = this.products.slice(0,this.defaultRecords) //show only 3
+       this.filteredProducts = this.products.slice(0,this.defaultRecords) //show only 3
       },
       error=>{
        console.log("All Products Component error: "+error.message);
@@ -70,14 +70,15 @@ export class AllProductsComponent implements OnInit {
     .afterClosed()
     .subscribe(
       res=>{
+        //res returns a boolean
         //delete if true
         if(res)
         {
          this.productService.deleteProduct(product.id).subscribe(
            res=>
            {
-              let indexOfProduct = this.products.indexOf(product)   
-              this.products.splice(indexOfProduct,1)  
+              let indexOfProduct = this.filteredProducts.indexOf(product)   
+              this.filteredProducts.splice(indexOfProduct,1)  
               //alert(res)     
            },
            error=>

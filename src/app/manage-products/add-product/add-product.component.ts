@@ -70,7 +70,7 @@ export class AddProductComponent implements OnInit {
       //remove the error
       this.imageError = ""   
       //get the user id and convert it to an integer/number  
-      this.model.user.id = parseInt(sessionStorage.getItem("userid"));
+      this.model.user.id = parseInt(localStorage.getItem("userid"));
     
       //send product to service
       this.service.addProduct(this.model,this.selectedFile)

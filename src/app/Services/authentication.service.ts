@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LoginViewModel } from '../models/login-view-model';
 import { User } from '../models/user';
+import { AuthHeaderService } from './auth-header.service';
 
 
 
@@ -15,11 +16,17 @@ import { User } from '../models/user';
 
 export class AuthenticationService {
    
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private authHeader:AuthHeaderService) { }
 
   private base_url = "http://localhost:8082";
   
   
+  //get auth token
+  getAuthToken()
+  {
+    return localStorage.getItem("authToken")
+  }
+
   //used to authenticate user and get jwt token
   authenticate(credentials:any) : Observable<any>
   {
@@ -27,14 +34,12 @@ export class AuthenticationService {
   }
 
   
-
   //get details -> role,id,firstname
   getUserDetails() : Observable<LoginViewModel>
   {
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")
-    });
-  
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
+
     return this.httpClient.get<LoginViewModel>(this.base_url+"/api/getDetails",{headers});
     
   }
@@ -92,11 +97,12 @@ export class AuthenticationService {
   changePassword(model:ChangePasswordModel):Observable<string>
   {
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")
-    })
-    return this.httpClient.post<string>(this.base_url+"/api/changePassword",model,{headers}
-    );
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
+
+    return this.httpClient.post<string>(this.base_url+"/api/changePassword",model,{headers});
   }
+
+ 
 
 
 

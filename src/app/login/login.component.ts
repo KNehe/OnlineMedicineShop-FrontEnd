@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         let responseToJson = JSON.stringify(res)
 
         let authToken  = JSON.parse(responseToJson).token
-
+      
         localStorage.setItem("authToken",authToken); 
 
         this.loadPage()
