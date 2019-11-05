@@ -61,10 +61,6 @@ export class ShoppingCartComponent implements OnInit {
   {
     this.service.getAllProducts().subscribe(
       response=>{
-        if(response == null)
-        {
-          return this.products=null
-        }
         this.products = response
       },
       error=>{

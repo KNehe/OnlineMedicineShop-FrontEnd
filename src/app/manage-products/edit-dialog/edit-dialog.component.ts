@@ -21,8 +21,8 @@ export class EditDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data,
              public dialogRef:MatDialogRef<EditDialogComponent>,
-             private service:ManageProductsService,
-             private allProductComponent:AllProductsComponent) 
+             private service:ManageProductsService
+              ) 
              { 
                this.model.id = data.product.id
                this.model.name = data.product.name

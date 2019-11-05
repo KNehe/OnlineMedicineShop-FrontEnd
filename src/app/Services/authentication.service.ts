@@ -4,7 +4,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LoginViewModel } from '../models/login-view-model';
 import { User } from '../models/user';
-import { AuthHeaderService } from './auth-header.service';
 
 
 
@@ -16,7 +15,7 @@ import { AuthHeaderService } from './auth-header.service';
 
 export class AuthenticationService {
    
-  constructor(private httpClient:HttpClient,private authHeader:AuthHeaderService) { }
+  constructor(private httpClient:HttpClient) { }
 
   private base_url = "http://localhost:8082";
   
