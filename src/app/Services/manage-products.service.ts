@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Product } from '../models/product';
 import { Purchase } from '../models/purchase';
 
@@ -104,6 +104,16 @@ export class ManageProductsService {
 
        return this.httpClient.get<Purchase[]>(this.base_url+"/api/getAllPurchases",{headers});
      }
+
+
+   //change shopping cart value
+  private messageSource = new BehaviorSubject("0")
+  currentValue = this.messageSource.asObservable()
+
+  changeValue(value:string)
+  {
+    this.messageSource.next(value)
+  }
   
   
 }

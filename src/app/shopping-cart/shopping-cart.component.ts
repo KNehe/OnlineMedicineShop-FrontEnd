@@ -81,6 +81,10 @@ export class ShoppingCartComponent implements OnInit {
       htmlElement.textContent = "Remove From Cart"
       htmlElement.classList.add('btn-change') //button changes red
       this.totalPrice +=  parseInt(product.price,10) //total price of items in the cart
+      
+      //set value of shopping cart
+      localStorage.setItem("shoppingCartNumber",this.cart.length.toString())
+      this.service.changeValue(localStorage.getItem("shoppingCartNumber"))
 
       this.purchase_success = null //
     }else
@@ -90,6 +94,10 @@ export class ShoppingCartComponent implements OnInit {
       htmlElement.textContent = "Add To Cart"
       htmlElement.classList.remove('btn-change')  //button changes to blue
       this.totalPrice -=  parseInt(product.price,10) //total price of items in the cart
+      
+      //set value of shopping cart
+      localStorage.setItem("shoppingCartNumber",this.cart.length.toString())
+      this.service.changeValue(localStorage.getItem("shoppingCartNumber"))
 
       this.purchase_success = null //
     }

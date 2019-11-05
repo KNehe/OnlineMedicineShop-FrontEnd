@@ -1,11 +1,11 @@
 <!--container row-->
 <div class="mycontainer" style="margin-top:90px; margin-bottom: 410px;" >
 
-  <!--column left-->
+  <!--column-->
 <div class="left-div  flex">
   <!--container-->
 <div class="container row">
-<div class="col-4 col-sm-4 col-md-4" *ngFor="let product of products">
+<div class="col-3 col-sm-3 col-md-3" *ngFor="let product of products">
   
   <div *ngIf="products == null"><b>No products available</b></div>
   <!--card-->
@@ -39,68 +39,8 @@
 </div>
 <!--container-->
 </div>
-<!--column left-->
+<!--column-->
 
-
-
-<!-------------------------------------------------    next div on the right -------------->
-
-
-
-<!--column right-->
-<div class="right-div">
-
-  <!--the shopping cart--> 
-  <div class="z-depth-1-half">
-     <h4 class="z-depth-1-half" id="shopping-cart-title">Shopping Cart</h4>
-     <div class="cart-text" *ngIf="cart == '' ">
-       <p>Cart is empty!</p>
-       <p>Add items to buy</p>
-     </div>
-      <ul *ngFor="let item of cart" >
-          <li><b>{{item.name}} </b> ${{ item.price}} </li>
-      </ul>
-  </div>
-   <!--the shopping cart--> 
-
-    <!--credit card form--> 
-  <div class="z-depth-1-half" *ngIf="totalPrice">
-     <h4 class="z-depth-1-half" id="make_payment-title">Make Payment</h4>
-     <!-- credit card form -->
-     <form class="credit_card_form">
-        <!-- Card Number -->
-        <div class="md-form">
-        <label for="card-number">Card Number</label>
-        <input type="text"  class="form-control mb-4"  required>
-        </div>
-
-        <!-- expiry month -->
-        <div class="md-form">
-        <label for="exp_month">Expiry Month</label>
-        <input type="text" class="form-control mb-4"  required>
-        </div>
-
-        <!-- expiry year -->
-        <div class="md-form">
-        <label for="exp_yr">Expiry Year</label>
-        <input type="text" class="form-control mb-4" required>
-        </div>
-
-        <!-- cvc -->
-        <div class="md-form">
-        <label for="cvc">CVC</label>
-        <input type="text" class="form-control mb-4"  required>
-        </div>
-        <!-- pay button -->
-        <button class="btn btn-info btn-sm" (click)="purchaseProducts()">Pay {{totalPrice}}</button>
-    </form>
-    <h6 *ngIf="purchase_success" class="text-success" style="padding:5px">{{purchase_success}}</h6>
-  </div>
-<!--credit card form--> 
-
-
-</div>
-   <!--column right-->
 
 </div>
 <!--container row-->
