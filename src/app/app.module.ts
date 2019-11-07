@@ -28,6 +28,7 @@ import { GuardGuard } from './Guards/guard.guard';
 import { ShoppingCartGuardGuard } from './Guards/shopping-cart-guard.guard';
 import { AuthenticationService } from './Services/authentication.service';
 import { DeactivateGuard } from './Guards/deactivate.guard';
+import { CheckOutComponent } from './check-out/check-out.component';
 
 
 
@@ -83,6 +84,10 @@ canActivate:[DeactivateGuard]
   data:{expectedRole:"USER"}
 },
 {
+  path:'checkout',
+  component:CheckOutComponent
+},
+{
   path:'logout',
   component:LoginComponent
 },
@@ -111,7 +116,8 @@ canActivate:[DeactivateGuard]
     DialogComponent,
     EditDialogComponent,
     ShoppingCartComponent,
-    RegisterComponent
+    RegisterComponent,
+    CheckOutComponent
     ],
   imports: [
     BrowserModule,

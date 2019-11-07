@@ -5,6 +5,7 @@ import { Purchase } from '../models/purchase';
 import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../Services/authentication.service';
 import { Router } from '@angular/router';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -19,7 +20,15 @@ export class ShoppingCartComponent implements OnInit {
   //shoppingcart
   cart:Product[] = []
 
+  //shopping cart icon
+  faShoppingCart = faShoppingCart
+
   htmlElement:HTMLElement
+
+  //number of items in cart
+  number_of_items = 0
+
+  cartName = "Empty Cart"
 
   //total price;
   totalPrice:number = null
@@ -33,10 +42,6 @@ export class ShoppingCartComponent implements OnInit {
     user:{id:0,firstName:'',lastName:'',email:'',password:'',phone:'',role:''},
     status:"Not Delivered"
   }
-
-  //purchase success response
-  purchase_success:String =  null
-
 
   constructor(private service:ManageProductsService,
               private snackbar:MatSnackBar,
@@ -81,7 +86,13 @@ export class ShoppingCartComponent implements OnInit {
       htmlElement.textContent = "Remove From Cart"
       htmlElement.classList.add('btn-change') //button changes red
       this.totalPrice +=  parseInt(product.price,10) //total price of items in the cart
-      this.purchase_success = null //
+      this.number_of_items = this.cart.length
+      
+      if(this.cart.length > 0)
+      {
+        this.cartName = "Check Out"
+      }
+      
     }else
     { 
       //when its in the cart
@@ -89,10 +100,22 @@ export class ShoppingCartComponent implements OnInit {
       htmlElement.textContent = "Add To Cart"
       htmlElement.classList.remove('btn-change')  //button changes to blue
       this.totalPrice -=  parseInt(product.price,10) //total price of items in the cart
-      this.purchase_success = null //
+      this.number_of_items = this.cart.length
+
+      if(this.cart.length == 0)
+      {
+        this.cartName = "Empty Cart"
+      }
     }
 
   }//add
+
+
+  //go to check out component
+  goToCheckOut()
+  {
+        this.router.navigate(["/checkout"])
+  }
 
 
   //purchase products
@@ -115,7 +138,6 @@ export class ShoppingCartComponent implements OnInit {
         response=>{
           
           if(counter === number_of_cart_items){
-            this.purchase_success = response
             this.snackbar.open(response,'',{
               duration:3000
             })

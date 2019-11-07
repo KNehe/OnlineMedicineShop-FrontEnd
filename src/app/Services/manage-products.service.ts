@@ -104,6 +104,10 @@ export class ManageProductsService {
 
        return this.httpClient.get<Purchase[]>(this.base_url+"/api/getAllPurchases",{headers});
      }
+      
+     //set cart items data
+     //to be used in shopping cart.ts and checkout.ts
+     cartItems:Product[] = []
 
   
   
