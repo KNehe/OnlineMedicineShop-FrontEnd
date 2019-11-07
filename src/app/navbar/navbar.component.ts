@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from '../Services/authentication.service';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { ManageProductsService } from '../Services/manage-products.service';
 
 
@@ -18,7 +17,7 @@ export class NavbarComponent implements OnInit {
   //but show log out link
   loggedIn = null
 
-  faShoppingCart = faShoppingCart
+
   
   number = null //shoping cart items
   constructor(private authService:AuthenticationService,
@@ -27,14 +26,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     this.authService.currentStatus.subscribe( status => this.loggedIn = status)
-
-    let isLoggedIn = this.authService.checkLogin()
-    let role = this.authService.checkRole()
-
-    if(isLoggedIn && role == "USER")
-    { 
-      this.manageProductService.currentValue.subscribe(currentNumber => this.number = currentNumber)
-    }
          
   }
 

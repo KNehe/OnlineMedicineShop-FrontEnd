@@ -1,13 +1,12 @@
-<!--container row-->
-<div class="mycontainer" style="margin-top:90px; margin-bottom: 410px;" >
+<!--container-->
+<div class="container" style="margin-top:90px; margin-bottom: 410px;" >
 
-  <!--column-->
-<div class="left-div  flex">
-  <!--container-->
-<div class="container row">
+  <!--row-->
+<div class="row">
 <div class="col-3 col-sm-3 col-md-3" *ngFor="let product of products">
   
   <div *ngIf="products == null"><b>No products available</b></div>
+
   <!--card-->
   <div class="card"  style="margin:5px;">
 
@@ -37,10 +36,9 @@
      
 </div>
 </div>
+<!--row-->
+
+
+
+</div>
 <!--container-->
-</div>
-<!--column-->
-
-
-</div>
-<!--container row-->
