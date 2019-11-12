@@ -18,33 +18,38 @@
 <!--row-->
 
 <!--row-->
-<div class="row">
+<div class="row" style="margin-top: 20px;">
 <div class="col-3 col-sm-3 col-md-3" *ngFor="let product of products">
   
   <div *ngIf="products == null"><b>No products available</b></div>
 
-  <!--card-->
-  <div class="card"  style="margin:5px;">
 
-    <img class="card-image z-depth-1-half"
+  <!--card-->
+  <mat-card  >
+    <img mat-card-image
         src="data:image/png;base64,{{product.image}}" 
         alt="product_image"
-        height="100px"
-        width="100%"
         >
-    <!--card body-->
-    <div class="card-body">
-    <p class="card-title">{{product.name}}</p>
-    <p class="card-text">${{product.price}}</p>
-
+    <!--mat-card-content-->
+    <mat-card-content>
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>${{product.price}}</mat-card-subtitle>
+    </mat-card-content>
+    <!--mat-card-content-->
+    
     <!--add to cart button -->
-        <button  class="addToCartBtn"
-         class="btn btn-outline-success waves-effect btn-sm" 
-         (click)="addToCart(product,$event.currentTarget)">
-         Add to Cart
-    </button>
-    </div>
-</div>
+    <mat-card-actions>
+      <button 
+      mat-button
+      class="btn btn-outline-success btn-sm"
+      (click)="addToCart(product,$event.currentTarget)"
+      >
+        Add to cart
+      </button>
+    </mat-card-actions>
+    <!--add to cart button -->
+
+  </mat-card>
 <!--card-->
    
      

@@ -19,7 +19,7 @@ import { AddProductComponent } from './manage-products/add-product/add-product.c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule, MatButtonModule, MatSnackBarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSuffix } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatSnackBarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatCardModule} from '@angular/material';
 import { EditDialogComponent } from './manage-products/edit-dialog/edit-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RegisterComponent } from './register/register.component';
@@ -138,8 +138,8 @@ canActivate:[DeactivateGuard]
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    FontAwesomeModule
-
+    FontAwesomeModule,
+    MatCardModule
   ],
   providers: [
     AuthenticationService,
