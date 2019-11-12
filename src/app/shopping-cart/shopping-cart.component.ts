@@ -84,7 +84,7 @@ export class ShoppingCartComponent implements OnInit {
     if( (this.cart.indexOf(product)) < 0){ 
       this.cart.push(product)
       htmlElement.textContent = "Remove From Cart"
-      htmlElement.classList.add('btn-change') //button changes red
+      htmlElement.classList.add('btn-change') 
       this.totalPrice +=  parseInt(product.price,10) //total price of items in the cart
       this.number_of_items = this.cart.length
       
@@ -98,7 +98,7 @@ export class ShoppingCartComponent implements OnInit {
       //when its in the cart
       this.cart.splice(this.cart.indexOf(product) ,1) 
       htmlElement.textContent = "Add To Cart"
-      htmlElement.classList.remove('btn-change')  //button changes to blue
+      htmlElement.classList.remove('btn-change') 
       this.totalPrice -=  parseInt(product.price,10) //total price of items in the cart
       this.number_of_items = this.cart.length
 
@@ -114,7 +114,8 @@ export class ShoppingCartComponent implements OnInit {
   //go to check out component
   goToCheckOut()
   {
-        this.router.navigate(["/checkout"])
+        this.router.navigate(["/checkout", JSON.stringify(this.cart)])
+        
   }
 
 

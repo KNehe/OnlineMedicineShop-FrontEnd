@@ -3,7 +3,7 @@
 
 <!--row-->
 <div class="row">
-  <div class="col-md-12 col-sm-12 col-lg-12 z-depth-1-half" style="padding: 5px;">
+  <div class="col-sm-12 z-depth-1-half" style="padding: 5px; margin: 10px;">
     <h4 class="text-center" > 
       <small class="badge badge-light" style="margin: 5px;" (click)="goToCheckOut()">
         {{number_of_items}}
@@ -19,41 +19,52 @@
 
 <!--row-->
 <div class="row" style="margin-top: 20px;">
-<div class="col-3 col-sm-3 col-md-3" *ngFor="let product of products">
+<!--column-->
+<div class="col-sm-4" *ngFor="let product of products" style="margin-bottom: 10px;">
   
   <div *ngIf="products == null"><b>No products available</b></div>
 
-
   <!--card-->
-  <mat-card  >
-    <img mat-card-image
+  <mdb-card >
+
+    <!--image-->
+    <mdb-card-img class="mdb-card-img  img-fluid rounded"
         src="data:image/png;base64,{{product.image}}" 
         alt="product_image"
         >
-    <!--mat-card-content-->
-    <mat-card-content>
-        <mat-card-title>{{product.name}}</mat-card-title>
-        <mat-card-subtitle>${{product.price}}</mat-card-subtitle>
-    </mat-card-content>
-    <!--mat-card-content-->
+    </mdb-card-img>
+
+    <!--card-content-->
+    <mdb-card-body>
+       <!--Title-->
+       <mdb-card-title>
+         <h4>{{product.name}}</h4>
+       </mdb-card-title>
+      
+       <!--Text-->
+       <mdb-card-text>
+          ${{product.price}}
+       </mdb-card-text>
+        
+    </mdb-card-body>
+    <!--card-content-->
     
     <!--add to cart button -->
-    <mat-card-actions>
-      <button 
-      mat-button
-      class="btn btn-outline-success btn-sm"
+      <a
+      mdbBtn
+      color="success" outline="true" class="btn-sm"
       (click)="addToCart(product,$event.currentTarget)"
       >
         Add to cart
-      </button>
-    </mat-card-actions>
+      </a>
     <!--add to cart button -->
 
-  </mat-card>
+  </mdb-card >
 <!--card-->
    
      
 </div>
+<!--column-->
 </div>
 <!--row-->
 

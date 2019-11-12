@@ -29,6 +29,8 @@ import { ShoppingCartGuardGuard } from './Guards/shopping-cart-guard.guard';
 import { AuthenticationService } from './Services/authentication.service';
 import { DeactivateGuard } from './Guards/deactivate.guard';
 import { CheckOutComponent } from './check-out/check-out.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 
 
@@ -84,7 +86,7 @@ canActivate:[DeactivateGuard]
   data:{expectedRole:"USER"}
 },
 {
-  path:'checkout',
+  path:'checkout/:data',
   component:CheckOutComponent
 },
 {
@@ -139,8 +141,9 @@ canActivate:[DeactivateGuard]
     MatButtonModule,
     MatIconModule,
     FontAwesomeModule,
-    MatCardModule
+    MDBBootstrapModule.forRoot()
   ],
+  schemas:[NO_ERRORS_SCHEMA],
   providers: [
     AuthenticationService,
      GuardGuard, 

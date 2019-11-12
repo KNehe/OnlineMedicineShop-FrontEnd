@@ -3,3 +3,9 @@
     color:white !important;
     background-color: #00c853!important;
 }
+
+.btn-sm:hover,.btn-outline-success:hover, .btn :hover
+{
+ background-color: #00c853 !important;
+ color: white !important;
+}

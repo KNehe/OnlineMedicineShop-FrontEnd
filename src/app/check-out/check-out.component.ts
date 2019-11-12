@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ManageProductsService } from '../Services/manage-products.service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-check-out',
@@ -8,16 +9,17 @@ import { ManageProductsService } from '../Services/manage-products.service';
   styleUrls: ['./check-out.component.css']
 })
 export class CheckOutComponent implements OnInit {
+  
+  cart:Product[] = []
 
-  constructor(private productService:ManageProductsService) { }
+  constructor(public activatedRoute:ActivatedRoute) { 
+ 
+  }
 
   ngOnInit() {
-   
-    console.log(this.cartItems)
+    const key :Product = this.activatedRoute.snapshot.params["cart"]
+    console.log(key)
   }
   
-  get cartItems()
-  {
-    return  this.productService.cartItems
-  }
+  
 }
