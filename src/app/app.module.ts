@@ -86,7 +86,7 @@ canActivate:[DeactivateGuard]
   data:{expectedRole:"USER"}
 },
 {
-  path:'checkout/:data',
+  path:'checkout',
   component:CheckOutComponent
 },
 {

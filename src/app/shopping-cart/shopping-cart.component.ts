@@ -28,7 +28,9 @@ export class ShoppingCartComponent implements OnInit {
   //number of items in cart
   number_of_items = 0
 
-  cartName = "Empty Cart"
+  cartName:string = "Empty Cart"
+
+  cartError:string = null;
 
   //total price;
   totalPrice:number = null
@@ -113,8 +115,19 @@ export class ShoppingCartComponent implements OnInit {
 
   //go to check out component
   goToCheckOut()
-  {
-        this.router.navigate(["/checkout", JSON.stringify(this.cart)])
+  { 
+
+    if(this.cart.length >0 && this.cart != null)
+    { 
+      //add cart in local storage
+      localStorage.setItem("cart",JSON.stringify(this.cart))
+      //change behaviorsubject value
+      this.service.changeCartData(JSON.parse(localStorage.getItem("cart")))
+      //navigate
+      this.router.navigate(["/checkout"],{skipLocationChange:true})
+    }   
+
+    return this.cartError = "Choose an item"
         
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpParams } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Observable, BehaviorSubject} from 'rxjs';
 import { Product } from '../models/product';
 import { Purchase } from '../models/purchase';
 
@@ -109,6 +109,15 @@ export class ManageProductsService {
      //to be used in shopping cart.ts and checkout.ts
      cartItems:Product[] = []
 
-  
+    //behavior subject for cart and shopping cart
+    subjectParam = JSON.parse(localStorage.getItem("cart"))
+    private cartDataSource = new BehaviorSubject(this.subjectParam)
+    currentCartData = this.cartDataSource.asObservable()
+
+    changeCartData(data:Product[])
+    {
+      this.cartDataSource.next(data)
+    }
+
   
 }
