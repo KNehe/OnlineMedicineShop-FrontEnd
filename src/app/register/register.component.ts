@@ -46,79 +46,56 @@ export class RegisterComponent implements OnInit {
     this.authService.registerUser(this.model)
     .subscribe(
       response =>{
-       if(response == "User saved")
-       {
-        //this.successMessage = response
-        //login the user if registration is successfull
-        this.loginModel.username = this.model.email
-        this.loginModel.password = this.model.password
-        this.login()
+        
+        let responseToJson = JSON.stringify(response)
 
-       }else if (response == "An error occurred User not saved!")
-       {
-        this.errorMessage = response
-       }
+        let authToken  = JSON.parse(responseToJson).token
+         
+        localStorage.setItem("authToken",authToken)
+
+        this.loadPage()
+
       },
       error=>{
-        this.errorMessage ="An error occurred"
+        this.errorMessage = error.message
       }
     );
   }//register
 
 
-  //login user
-  login(){
-   
-    this.authService.authenticate(this.loginModel).subscribe(
-      response=>{
-      
-        let responseToJson = JSON.stringify(response)
-
-        let authToken  = JSON.parse(responseToJson).token
-
-        sessionStorage.setItem("authToken",authToken); 
-        
-        //load page according to user role
-        this.loadPage()
-       },
-       
-      err=>{
-        this.errorMessage = "An error occurred!"
-      }
-     );
-  }//login
-
- //load page according to user role
+  //loadpage according to user role
   loadPage()
   {   
        
        this.authService.getUserDetails().subscribe(
-         response=>{
+         res=>{
 
-           this.loginViewModel = response;
+           this.loginViewModel = res;
           
-           let userid = JSON.stringify(response.id);
+           let userid = JSON.stringify(res.id);
 
-           sessionStorage.setItem("userid",userid);
-           sessionStorage.setItem("role",response.role);
-           sessionStorage.setItem("FirstName",response.firstname);
+           localStorage.setItem("userid",userid);
+           localStorage.setItem("role",res.role);
+           localStorage.setItem("FirstName",res.firstname);
+           
 
-           if(response.role == "ADMIN")
+           if(res.role == "ADMIN")
            {
             this.router.navigate(["/manageproducts"],{skipLocationChange: true});
-           }else if (response.role == "User")
+
+           }
+           else if (res.role == "USER")
            {
             this.router.navigate(["/shoppingcart"],{skipLocationChange:true})
            }
-           //used to show appropiate links on navbar
-           //hide register/login and show logout
-           this.authService.changeStatus(true)
+         
          },
          err=>{
            this.errorMessage = "An error occured Try again!";
          }
        );
   }//load page
+
 
 
 

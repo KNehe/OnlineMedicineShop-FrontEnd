@@ -89,7 +89,7 @@ export class AuthenticationService {
   //register user
   registerUser(user:User): Observable<string>
   {
-    return this.httpClient.post<string>(this.base_url+"/api/register",user);
+    return this.httpClient.post<string>(this.base_url+"/register",user);
   }
 
   //change password
