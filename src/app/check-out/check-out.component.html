@@ -16,7 +16,7 @@
                 <mdb-card-body> 
 
                     <mdb-card-title>
-                        <h5><b>Items picked</b></h5>
+                        <h5><b>Items picked : <small class="text-success">{{paidMessage}}</small></b></h5>
                     </mdb-card-title>
                     
                     <small 
@@ -74,9 +74,11 @@
                               #cardNumber ="ngModel"
                               [ngClass]="{ 'is-invalid': f.submitted && cardNumber.invalid}"
                               required
+                              pattern="([0-9]{16})"
                               >
-                              <div *ngIf="f.submitted && cardNumber.invalid" class="invalid-input">
+                              <div *ngIf="f.submitted || cardNumber.invalid && (cardNumber.dirty || cardNumber.touched)" class="invalid-input">
                                     <small *ngIf="cardNumber.errors?.required">Field is required</small>
+                                    <small *ngIf="cardNumber.errors?.pattern">Invalid</small>
                                </div>
                             </div>
                               
@@ -89,13 +91,15 @@
                                id="exp_month" 
                                mdbInput class="form-control form-control-sm"  
                                required
+                               pattern="(0[1-9]|1[0-2])"
                                name="expiryMonth"
                                [(ngModel)]="creditCard.expiryMonth"
                                #month = "ngModel"
                                [ngClass]= "{ 'is-invalid': f.submitted && month.invalid}"
                                >
-                               <div *ngIf="f.submitted && month.invalid" class="invalid-input">
+                               <div *ngIf="f.submitted || month.invalid && (month.dirty || month.touched)" class="invalid-input">
                                     <small *ngIf="month.errors?.required">Field is required</small>
+                                    <small *ngIf="month.errors?.pattern">Invalid month. Use e.g 01 - 12</small>
                                </div>
                             </div>
                             
@@ -111,14 +115,15 @@
                                required
                                checkExpiryYear
                                name="expiryYear"
+                               pattern="(20([1-9]{2}))"
                                [(ngModel)]="creditCard.expiryYear"
                                #year = "ngModel"
                                [ngClass]= "{ 'is-invalid': f.submitted && year.invalid}"
 
                                >
-                               <div *ngIf="f.submitted && year.invalid" class="invalid-input">
+                               <div *ngIf="f.submitted || year.invalid && (year.dirty || year.touched)" class="invalid-input">
                                     <small *ngIf="year.errors?.required">Field is required</small>
-                                    <small *ngIf="year.errors?.checkExpiryYear">Should be a number</small>
+                                    <small *ngIf="year.errors?.pattern">Invalid year. Use e.g 2011 - 2099 </small>
                                </div>
                                
                             </div>
@@ -133,13 +138,15 @@
                               mdbInput 
                               class="form-control form-control-sm"  
                               required
+                              pattern="[0-9]{3,4}"
                               name="cvc"
                               [(ngModel)]="creditCard.cvc"
                               #cvc = "ngModel"
                               [ngClass]= "{ 'is-invalid': f.submitted && cvc.invalid}"
                                >
-                              <div *ngIf="f.submitted && cvc.invalid" class="invalid-input">
+                              <div *ngIf="f.submitted || cvc.invalid && (cvc.dirty || cvc.touched)" class="invalid-input">
                                     <small *ngIf="cvc.errors?.required">Field is required</small>
+                                    <small *ngIf="cvc.errors?.pattern">Invalid CVC</small>
                               </div>
                         </div>
                             
@@ -158,13 +165,20 @@
                             </button>
                             <!-- pay button -->
 
-                            <!-- error -->
-                            <div class="text-danger">
-                                <p >error</p>
+                            <!-- Loader/spinner-->
+                            <div *ngIf="spinnerShown" class="spinner-border text-success" role="status">
+                                <span class="sr-only">Loading...</span>
                             </div>
-                            <!-- success -->
-                            <div  class="text-info">
-                                <p >success</p>
+
+                            <!-- error message -->
+                            <div class="text-danger">
+                                <small *ngIf="errorMessage"><b>{{errorMessage}}</b></small>
+                            </div>
+
+                            <!-- success message -->
+                            <div  class="text-success">
+                                <small *ngIf="successMessage"><b>{{successMessage}}</b></small>
+                                <small *ngIf="successMessage"><b> We shall call you shortly</b></small>
                             </div>
                         </form>
                         <!-- Default form login -->

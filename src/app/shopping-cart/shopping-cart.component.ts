@@ -35,6 +35,9 @@ export class ShoppingCartComponent implements OnInit {
   //total price;
   totalPrice:number = null
 
+   //used to show and hide spinner
+   spinnerShown:boolean = true
+
   //purchase model
   purchase:Purchase ={
     id:null,
@@ -68,6 +71,12 @@ export class ShoppingCartComponent implements OnInit {
   {
     this.service.getAllProducts().subscribe(
       response=>{
+        //hide the spinner
+        this.spinnerShown = false
+        //remove paid message from local storage
+        //just in case user had paid for a product earlier
+        //it is set when a user pays successfully for items ->CheckOutComponent->purchase()
+        localStorage.removeItem("Paid")
         this.products = response
       },
       error=>{
@@ -131,40 +140,6 @@ export class ShoppingCartComponent implements OnInit {
         
   }
 
-
-  //purchase products
-  purchaseProducts(){
-
-    let number_of_cart_items = this.cart.length
-    let counter = 0
-
-    this.cart.forEach(cartItem =>{
-
-      this.purchase.amount_paid = parseInt(cartItem.price)
-      this.purchase.date_paid = new Date()
-      this.purchase.product =  cartItem
-      this.purchase.user.id = parseInt(sessionStorage.getItem("userid"))
-      
-      counter ++
-
-      this.service.sendPurchase(this.purchase)
-      .subscribe(
-        response=>{
-          
-          if(counter === number_of_cart_items){
-            this.snackbar.open(response,'',{
-              duration:3000
-            })
-          }
-          
-      },
-      error=>{
-        alert(error)
-      });
-
-    });
-  }
- 
 
  
 

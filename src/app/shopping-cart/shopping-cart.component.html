@@ -3,6 +3,8 @@
 
 <!--row-->
 <div class="row">
+  
+<!--column-->
   <div class="col-sm-12 z-depth-1-half" style="padding: 5px; margin: 10px;">
     <h4 class="text-center" > 
       <small class="badge badge-light" style="margin: 5px;" (click)="goToCheckOut()">
@@ -16,18 +18,35 @@
         {{cartError}}
       </span>-->
     </h4>
-    
   </div>
+  <!--column-->
+</div>
+<!--row-->
+
+<!--row-->
+<div class="row">
+
+  <!--column-->
+  <div class="col-md">
+     <!--spinner/loader-->
+     <div *ngIf="spinnerShown" class="d-flex justify-content-center">
+        <div  class="spinner-border text-success" role="status">
+           <span class="sr-only">Loading...</span>
+         </div>
+       </div>
+  </div>
+<!--column-->
+
 </div>
 <!--row-->
 
 <!--row-->
 <div class="row" style="margin-top: 20px;">
+
 <!--column-->
 <div class="col-sm-4" *ngFor="let product of products" style="margin-bottom: 10px;">
   
   <div *ngIf="products == null"><b>No products available</b></div>
-
   <!--card-->
   <mdb-card >
 

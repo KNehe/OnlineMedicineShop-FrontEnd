@@ -88,10 +88,16 @@ export class ManageProductsService {
     }
 
     //send purchased items to backend
-    sendPurchase(purchase:Purchase) : Observable<any>
-    {   
+    sendPurchase(purchase:Purchase,cardNumber:String,expiryMonth:string,expiryYear:string,cvc:string,amount:String) : Observable<any>
+    { 
       const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")})
+        Authorization: 'Bearer ' + localStorage.getItem("authToken"),
+        cardNumber: ''+cardNumber,
+        month:''+expiryMonth,
+        year:''+expiryYear,
+        cvc:''+cvc,
+        amount:''+amount      
+      })
 
       return this.httpClient.post<any>(this.base_url+"/api/purchase",purchase,{headers});
     }
