@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faCoffee, faGift, faHospital, } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faGift, faHospital, faBandAid, } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   faCoffee  = faCoffee
   faHospital = faHospital
   faGift = faGift
+  faBandAid = faBandAid
 
   
   

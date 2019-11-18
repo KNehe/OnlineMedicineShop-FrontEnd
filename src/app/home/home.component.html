@@ -1,35 +1,74 @@
-<!-- home-->
-<div class="flex-box">
+<!-- container fluid-->
+<div class="container-fluid">
 
-    <div class="flex-item-1 z-depth-1-half">
-    
-            <h4 class="flex-item-1-content">Buy world class Medicine</h4>
-   
-    </div>
+<!-- Jumbotron -->
+<mdb-card style="background-color: green;">
 
-    <div class="flex-item-2 ">
-    
-            <div class="flex-item-2-1 z-depth-1-half" >
-                <fa-icon [icon]="faGift"  size="4x" class="icon icon-color"></fa-icon>
-                <p class="icon-label">We value your health</p>
-            </div>
+        <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+          <div class="py-5">
+      
+            <!-- Content -->
+            <h2 class="card-title h2 my-4 py-2">
+              <fa-icon [icon]="faBandAid"></fa-icon>
+              Buy world class medicine
+            </h2>
+            <p class="mb-4 pb-2 px-md-5 mx-md-5">Every body deserves a great life. 
+              The easiest way to be happy is staying healthy and getting proper 
+              medicine when sick. We aim at building the future for our health
+            </p>
+            <a
+             mdbBtn 
+            style="background-color:  rgb(5, 148, 62);" 
+            mdbWavesEffect
+            routerLink="/login" skipLocationChange
+            class="hover"
+            > 
+            <mdb-icon fas icon="clone" class="left"></mdb-icon>Get started</a>
+      
+          </div>
+        </div>
+</mdb-card>
+<!-- Jumbotron -->
 
-            <div class="flex-item-2-2 z-depth-1-half" >
-                    <fa-icon [icon] ="faCoffee"  size="4x" class="icon icon-color"></fa-icon>
-                    <p class="icon-label">Health is wealth</p>
-            </div>
 
-            <div class="flex-item-2-3 z-depth-1-half">
-                    <fa-icon [icon]="faHospital" size="4x" class="icon icon-color"></fa-icon>
-                    
-                    <p class="icon-label">Save more with us</p>
-            </div>
-   
-    </div>
+<!--row-->
+<div class="container row" style="margin-top:20px;" >
 
+  <!--column-->
+      <div class="col-md z-depth-1-half" style="margin:10px; padding:10px"  >
 
-    
+          <fa-icon [icon]="faGift"  size="4x" class="icon icon-color"></fa-icon>
+
+          <p class="icon-label">We value your health</p>
+
+      </div>     
+  <!--column-->
+     
+      
+  <!--column-->
+      <div class="col-md z-depth-1-half"  style="margin:10px; padding:10px" >
+
+              <fa-icon [icon] ="faCoffee"  size="4x" class="icon icon-color"></fa-icon>
+
+              <p class="icon-label">Health is wealth</p>
+
+      </div>
+      
+  <!--column-->
+
+  
+  <!--column-->
+      <div class="col-md z-depth-1-half" style="margin:10px; padding:10px" >
+
+              <fa-icon [icon]="faHospital" size="4x" class="icon icon-color"></fa-icon>
+              
+              <p class="icon-label">Save more with us</p>
+
+      </div>
+  <!--column-->
+
 </div>
+<!--row-->
 
-
-<!-- home-->
+</div>
+<!-- container fluid-->
