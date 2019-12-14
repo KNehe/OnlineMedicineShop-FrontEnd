@@ -38,7 +38,6 @@ export class AuthenticationService {
   {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-
     return this.httpClient.get<LoginViewModel>(this.base_url+"/api/getDetails",{headers});
     
   }

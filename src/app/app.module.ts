@@ -31,6 +31,7 @@ import { DeactivateGuard } from './Guards/deactivate.guard';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CustomHttpInterceptor } from './Guards/httpInterceptor';
 
 
 
@@ -145,9 +146,14 @@ canActivate:[DeactivateGuard]
   ],
   schemas:[NO_ERRORS_SCHEMA],
   providers: [
-    AuthenticationService,
+     AuthenticationService,
      GuardGuard, 
-     ShoppingCartGuardGuard
+     ShoppingCartGuardGuard,
+     {
+       provide:HTTP_INTERCEPTORS,
+       useClass: CustomHttpInterceptor,
+       multi:true
+     }
     ],
   bootstrap: [AppComponent],
   entryComponents:[DialogComponent,EditDialogComponent],
