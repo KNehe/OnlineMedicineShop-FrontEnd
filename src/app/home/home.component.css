@@ -10,9 +10,14 @@
 
 
 .icon-color{
-    color: rgb(0, 0, 0);
+    color:  rgb(32, 116, 32);;
 }
 .hover:hover{
     color: white !important;
+}
+
+.text-font
+{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
 }
 

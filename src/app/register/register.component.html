@@ -1,108 +1,120 @@
+ <!--container-fluid-->
+<div class="text-font container-fluid">
     <!-- row -->
     <div class="row">
-        <!-- column -->
-        <div class="col-sm-3 col-md-3 col-lg-3"></div>
-
-      <div class="col-sm-6 col-md-6 col-lg-6 formh">
-               <!-- form -->
-      <form class=" z-depth-1-half form" #f = "ngForm" (ngSubmit)=" f.valid && register()" method="POST">
-              <!-- login error -->
-              <small *ngIf="errorMessage" class="text-danger text-center "></small>
-
-               
+            <!-- column -->
+            <div class="col-sm-3 col-md-3 col-lg-3"></div>
+    
+          <div class="col-sm-6 col-md-6 col-lg-6 formholder">
+                   <!-- form -->
+          <form class=" z-depth-1-half form" #f = "ngForm" (ngSubmit)=" f.valid && register()" method="POST">
+                  
+                <div class="icon">
+                        <mdb-icon fas icon="user" style="color:rgb(19, 80, 42)" size="3x"></mdb-icon>
+                </div>
             
-              <!-- input first name -->
-            <div class="md-form formInput">
-                <i class="fa fa-envelope prefix"></i>
-                <label for="fName">Your First Name</label>
-                <input type="text" name="fName" id="fName" class="form-control"
-                [(ngModel)]="model.firstName"
-                #fName = "ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && fName.invalid}"
-                required
-                />
-                 <div *ngIf="f.submitted && fName.invalid" class="invalid-input">
-                    <small *ngIf="fName.errors?.required">Field is required</small>
-                 </div>
-            </div>
+                  <!-- login error -->
+                  <small *ngIf="errorMessage" class="text-danger text-center "></small>
+    
+                   
+                
+                  <!-- input first name -->
+                <div class="md-form formInput">
+                    <i class="fa fa-user prefix"></i>
+                    <label for="fName">Your First Name</label>
+                    <input type="text" name="fName" id="fName" class="form-control"
+                    [(ngModel)]="model.firstName"
+                    #fName = "ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && fName.invalid}"
+                    required
+                    />
+                     <div *ngIf="f.submitted && fName.invalid" class="invalid-input">
+                        <small *ngIf="fName.errors?.required">Field is required</small>
+                     </div>
+                </div>
+    
+                <!-- input last name -->
+                <div class="md-form formInput">
+                    <i class="fa fa-user prefix"></i>
+                    <label for="lName">Your Last Name</label>
+                    <input type="text" name="lName" id="lName" class="form-control"
+                    [(ngModel)]="model.lastName"
+                    #lName = "ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && lName.invalid}"
+                    required
+                    />
+                     <div *ngIf="f.submitted && lName.invalid" class="invalid-input">
+                        <small *ngIf="lName.errors?.required">Field is required</small>
+                     </div>
+                </div>
+    
+                 <!-- input phone number -->
+                 <div class="md-form formInput">
+                    <i class="fa fa-phone prefix"></i>
+                    <label for="phone">Your Phone Number</label>
+                    <input type="text" name="phone" id="phone" class="form-control"
+                    [(ngModel)]="model.phone"
+                    #phone = "ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && phone.invalid}"
+                    required
+                    />
+                     <div *ngIf="f.submitted && phone.invalid" class="invalid-input">
+                        <small *ngIf="phone.errors?.required">Field is required</small>
+                     </div>
+                </div>
+    
+    
+                <!-- input email -->
+                <div class="md-form formInput">
+                    <i class="fa fa-envelope prefix"></i>
+                    <label for="email">Your email</label>
+                    <input type="email" name="email" id="email" class="form-control"
+                    [(ngModel)]="model.email"
+                    #email = "ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid}"
+                    required email
+                    />
+                     <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+                        <small *ngIf="email.errors?.required">Field is required</small>
+                        <small *ngIf="email.errors?.email">Field is not an email</small>
+                     </div>
+                </div>
+                <!-- input password -->
+                <div class="md-form formInput">
+                    <i class="fa fa-lock prefix"></i>
+                    <label for="password">Your password</label>
+                    <input type="password" name="password" id="password"  class="form-control" 
+                    [(ngModel)]="model.password"
+                    #pass = "ngModel"
+                    [ngClass]= "{ 'is-invalid': f.submitted && pass.invalid}"
+                    required
+                    />
+                     <div *ngIf="f.submitted && pass.invalid" class="invalid-input">
+                         <small *ngIf="pass.errors?.required">Field is required</small>
+                     </div>
+                </div>
+                <!-- button -->
+                <div class="text-center " style="margin: auto">
+                     <button class="btn btn-primary" type="submit" name="submit">Register</button>
+                </div>
+                     <!--  -->
+                     <div class="text-center " style="margin: auto;color: black; font-weight: bold;">
+                              <p routerLink="/login">Already have an account? Login</p>
+                  </div>
+                <div>
+                    <small *ngIf="successMessage" class="text-success">{{successMessage}}</small>
+                    <small *ngIf="errorMessage"class="text-danger">{{errorMessage}}</small>
+                </div>
+            </form>
+            <!-- form -->
+          </div>
+    
+          <div class="col-sm-3 col-md-3 col-lg-3"></div>
+          <!-- column-->
+        </div>
+        <!-- row -->
+    
+</div>
+ <!--container-fluid-->
 
-            <!-- input last name -->
-            <div class="md-form formInput">
-                <i class="fa fa-envelope prefix"></i>
-                <label for="lName">Your Last Name</label>
-                <input type="text" name="lName" id="lName" class="form-control"
-                [(ngModel)]="model.lastName"
-                #lName = "ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && lName.invalid}"
-                required
-                />
-                 <div *ngIf="f.submitted && lName.invalid" class="invalid-input">
-                    <small *ngIf="lName.errors?.required">Field is required</small>
-                 </div>
-            </div>
-
-             <!-- input phone number -->
-             <div class="md-form formInput">
-                <i class="fa fa-envelope prefix"></i>
-                <label for="phone">Your Phone Number</label>
-                <input type="text" name="phone" id="phone" class="form-control"
-                [(ngModel)]="model.phone"
-                #phone = "ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && phone.invalid}"
-                required
-                />
-                 <div *ngIf="f.submitted && phone.invalid" class="invalid-input">
-                    <small *ngIf="phone.errors?.required">Field is required</small>
-                 </div>
-            </div>
-
-
-            <!-- input email -->
-            <div class="md-form formInput">
-                <i class="fa fa-envelope prefix"></i>
-                <label for="email">Your email</label>
-                <input type="email" name="email" id="email" class="form-control"
-                [(ngModel)]="model.email"
-                #email = "ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && email.invalid}"
-                required email
-                />
-                 <div *ngIf="f.submitted && email.invalid" class="invalid-input">
-                    <small *ngIf="email.errors?.required">Field is required</small>
-                    <small *ngIf="email.errors?.email">Field is not an email</small>
-                 </div>
-            </div>
-            <!-- input password -->
-            <div class="md-form formInput">
-                <i class="fa fa-lock prefix"></i>
-                <label for="password">Your password</label>
-                <input type="password" name="password" id="password"  class="form-control" 
-                [(ngModel)]="model.password"
-                #pass = "ngModel"
-                [ngClass]= "{ 'is-invalid': f.submitted && pass.invalid}"
-                required
-                />
-                 <div *ngIf="f.submitted && pass.invalid" class="invalid-input">
-                     <small *ngIf="pass.errors?.required">Field is required</small>
-                 </div>
-            </div>
-            <!-- button -->
-            <div class="text-center " style="margin: auto">
-                 <button class="btn btn-primary" type="submit" name="submit">Register</button>
-            </div>
-                 <!--  -->
-                 <div class="text-center " style="margin: auto;color: black; font-weight: bold;">
-                          <p routerLink="/login">Already have an account? Login</p>
-              </div>
-            <div>
-                <small *ngIf="successMessage" class="text-success">{{successMessage}}</small>
-                <small *ngIf="errorMessage"class="text-danger">{{errorMessage}}</small>
-            </div>
-        </form>
-        <!-- form -->
-      </div>
-
-      <div class="col-sm-3 col-md-3 col-lg-3"></div>
-      <!-- column-->
-    </div>
-    <!-- row -->
+    

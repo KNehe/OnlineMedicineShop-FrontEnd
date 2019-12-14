@@ -1,13 +1,22 @@
-    <!-- row -->
+<!--container-fluid-->
+<div class="text-font container-fluid">
+      <!-- row -->
       <div class="row">
+
           <!-- column -->
           <div class="col-sm-3 col-md-3 col-lg-3"></div>
+          <!-- column -->
 
-        <div class="col-sm-6 col-md-6 col-lg-6 formh">
+        <!-- column -->
+        <div class="col-sm-6 col-md-6 col-lg-6 formholder">
         <!-- form -->
         <form class=" z-depth-1-half form" #f = "ngForm" (ngSubmit)=" f.valid && login()" method="POST">
            
-          <fa-icon [icon]="faUserCircle" size="4x" class="icon"></fa-icon> 
+          <!-- <fa-icon [icon]="faUserCircle" size="4x" class="icon"></fa-icon>  -->
+          
+          <div class="icon ">
+              <mdb-icon fas icon="user" style="color:rgb(19, 80, 42)" size="3x"></mdb-icon>
+          </div>
 
           <!-- login error -->
           <small *ngIf="errorMessage" class="text-danger text-center ">{{errorMessage}}</small>
@@ -44,7 +53,9 @@
               </div>
               <!-- button -->
               <div class="text-center " style="margin: auto">
-                   <button class="btn btn-primary" type="submit" name="submit">Login</button>
+                   <button class="btn btn-primary" type="submit" name="submit">
+                     Login
+                    </button>
               </div>
 
               <!--  -->
@@ -52,12 +63,25 @@
                 <small>Forgot password?</small>
                 <p routerLink="/register">Don't have an account? Register</p>
              </div>
+
+              <!--spinner/loader-->
+            <div *ngIf="spinnerShown" class="d-flex justify-content-center">
+                <div  class="spinner-border text-success" role="status">
+                  <span class="sr-only">Logging you in...</span>
+                </div>
+            </div>
               
           </form>
           <!-- form -->
         </div>
-
+        <!-- column -->
+        
+        <!-- column -->
         <div class="col-sm-3 col-md-3 col-lg-3"></div>
         <!-- column-->
+        
       </div>
       <!-- row -->
+
+</div>
+<!--container-fluid-->

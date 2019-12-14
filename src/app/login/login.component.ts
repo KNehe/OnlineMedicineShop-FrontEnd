@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthenticationService } from '../Services/authentication.service';
 import { LoginViewModel } from '../models/login-view-model';
 import { Router } from '@angular/router';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+//import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -15,7 +15,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 export class LoginComponent implements OnInit {
   
   ///font awesome icon
-  faUserCircle = faUserCircle
+ // faUserCircle = faUserCircle
   
   model:LoginModel={
   username:'',
@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   loginViewModel:LoginViewModel;
   
   errorMessage = null;
+
+   //used to show and hide spinner
+   spinnerShown:boolean = false
 
 
   constructor(private authService:AuthenticationService,
@@ -47,6 +50,10 @@ export class LoginComponent implements OnInit {
   
   //login user
   login(){
+    
+    this.errorMessage = null
+    this.spinnerShown = true
+
     this.authService.authenticate(this.model).subscribe(
       res=>{
     
@@ -55,11 +62,14 @@ export class LoginComponent implements OnInit {
         let authToken  = JSON.parse(responseToJson).token
       
         localStorage.setItem("authToken",authToken); 
+        
+        this.spinnerShown = false
 
         this.loadPage()
        },
        
       err=>{
+        this.spinnerShown = false
         this.errorMessage = "Invalid Credentials"
       }
      );

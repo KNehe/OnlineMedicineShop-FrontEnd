@@ -1,34 +1,51 @@
-.formh{
- margin-top:150px !important;
- margin-bottom:200px !important;
+.formholder{
+ margin-top:170px !important;
+ margin-bottom:50px !important;
 }
 
 .form{
-    height: 400px !important;
-    padding: 10px !important;
+    padding: 20px !important;
 }
 
 .btn-primary
 {
-    background-color:  rgb(8, 8, 8) !important ;
+    background-color: #007E33!important ;
     margin-top: 10px !important;
     margin-bottom:  5px !important;
     width: 100% !important;
 }
 
 .fa{
-    color: rgb(8,8,8) !important;
+    color:rgb(6, 175, 6) !important;
 }
 
 .form-control{
-border-bottom: 1px solid rgb(65, 63, 63) !important;
+border-bottom: 1px solid #007E33 !important;
 }
+
+
+input[type=password]:focus:not([readonly]) {
+    border-bottom: 1px solid rgb(6, 175, 6) !important;
+    box-shadow: 0 1px 0 0 rgb(6, 175, 6) !important; 
+}
+
+
+input[type=email]:focus:not([readonly]) {
+    border-bottom: 1px solid rgb(6, 175, 6) !important;
+    box-shadow: 0 1px 0 0 rgb(6, 175, 6) !important; 
+}
+
 
 .invalid-input{
     color:red;
     margin-left: 35px;
 }
+
 .icon{
-    margin-left: 300px;
-    color: rgb(104, 102, 102);
+       text-align: center !important;
+}
+
+.text-font
+{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
 }
