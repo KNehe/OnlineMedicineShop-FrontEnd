@@ -1,57 +1,58 @@
-<!--row-->
-<div class="container-fluid row" style="margin-top: 50px;"> 
-    
-<!--column right-->
-<!--side navigation-->
-<div class="side-nav-div-left col-sm-4 c0l-md-4 col-lg-4 z-depth-1-half">
-    <!--side navigation header-->
-    <div class="side-nav-header">
-        <p>
-            Admin
-        </p>
-    </div>
-     <!--side navigation header-->
+<!--container-->
+<div class="container" style="margin-top: 50px;"> 
+   
+    <!--row-->
+    <div class="row">
 
-     <!--side navigation items-->
-    <ul class="navbar-nav" >
-            <li class="list-item" style="margin-top:20px;">
+     <!--column-->
+    <div class="col-md z-depth-1-half" style=" margin-top:30px;">
+
+   <!-- items-->
+    <ul style="margin-top: 10px;">
+            <li class="list-item">
                     <a [routerLink]="[{ outlets: {rightdiv: ['addProduct'] } }]" skipLocationChange>
-                        <fa-icon [icon]="faBook" size="2x" class="icon"></fa-icon>
+                        <fa-icon [icon]="faBook" size="1x" class="icon"></fa-icon>
                         Add Product
                     </a>
             </li>
-        <li class="list-item" style="margin-top: 10px;">
+        <li class="list-item">
             <a [routerLink]="[{ outlets: {rightdiv: ['']} }]" skipLocationChange>
-            <fa-icon [icon]="faEdit" size="2x" class="icon"></fa-icon>
+            <fa-icon [icon]="faEdit" size="1x" class="icon icon-color"></fa-icon>
                 Manage Products
             </a>
         </li>
 
         <li class="list-item">
             <a [routerLink]="[{ outlets: {rightdiv: ['vieworders'] } }]" skipLocationChange>
-                <fa-icon [icon]="faBookOpen" size="2x" class="icon"></fa-icon>
+                <fa-icon [icon]="faBookOpen" size="1x" class="icon"></fa-icon>
                 View orders
             </a>
         </li>
 
         <li class="list-item">
             <a [routerLink]="[{ outlets: {rightdiv: ['settings']}}]" skipLocationChange>
-                <fa-icon [icon]="faCogs" size="2x" class="icon"></fa-icon>
+                <fa-icon [icon]="faCogs" size="1x" class="icon"></fa-icon>
                 Settings
             </a>
         </li>
     </ul>
-    <!--side navigation items-->
-</div>
-<!--side navigation-->
-<!--column-->
+    <!--navigation items-->
 
-
-<!--column left-->
-<div class="side-nav-div-right col-sm-8 c0l-md-8 col-lg-8 z-depth-1-half">
-        <router-outlet name="rightdiv"></router-outlet>
-</div>
-<!--column-->
+     </div>
+    <!--column-->
 
 </div>
 <!--row-->
+
+<!--row-->
+<div class="row">
+<!--column -->
+<div class="col-md z-depth-1-half" style="margin-top:10px;">
+        <router-outlet name="rightdiv"></router-outlet>
+</div>
+<!--column-->
+</div>
+<!--row-->
+
+</div>
+<!--container-->

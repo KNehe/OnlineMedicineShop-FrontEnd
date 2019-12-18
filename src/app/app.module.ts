@@ -32,6 +32,8 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CustomHttpInterceptor } from './Guards/httpInterceptor';
+import {DataTablesModule} from 'angular-datatables'
+import { ManageProductsService } from './Services/manage-products.service';
 
 
 
@@ -142,13 +144,15 @@ canActivate:[DeactivateGuard]
     MatButtonModule,
     MatIconModule,
     FontAwesomeModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    DataTablesModule
   ],
   schemas:[NO_ERRORS_SCHEMA],
   providers: [
      AuthenticationService,
      GuardGuard, 
      ShoppingCartGuardGuard,
+     ManageProductsService,
      {
        provide:HTTP_INTERCEPTORS,
        useClass: CustomHttpInterceptor,

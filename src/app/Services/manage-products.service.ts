@@ -37,12 +37,12 @@ export class ManageProductsService {
   }
 
   //get all products
-  getAllProducts() : Observable<Product[]>
+  getAllProducts(page:number) : Observable<Product[]>
    {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem("authToken")})
     
-     return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts",{headers});
+     return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts?page="+page,{headers});
 
      
    }
@@ -110,6 +110,8 @@ export class ManageProductsService {
 
        return this.httpClient.get<Purchase[]>(this.base_url+"/api/getAllPurchases",{headers});
      }
+
+    
       
      //set cart items data
      //to be used in shopping cart.ts and checkout.ts

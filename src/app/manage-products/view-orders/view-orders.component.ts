@@ -19,7 +19,7 @@ export class ViewOrdersComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   //for mat-table
-  displayedColumns: string[] = ['id','customer.name','product.name','amount_paid','date_paid','product.user.phone','status']; 
+  displayedColumns: string[] = ['id','customer.name','product.name','amount_paid','date_paid','product.user.phone','status',"Confirm"]; 
 
   @ViewChild(MatSort,{static:true}) sort:MatSort
   @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator
@@ -91,5 +91,3 @@ export class ViewOrdersComponent implements OnInit {
   }
 
 }
-
-

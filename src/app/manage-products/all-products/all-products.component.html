@@ -1,44 +1,88 @@
-<h4> MANAGE PRODUCTS</h4>
+<!--container-->
+<div class="container">
 
-<!--card-->
-    <div class="row" style="margin-left:20px;">
-            <div class="col-md-3 card" *ngFor="let product of filteredProducts" style="margin:10px;">
+    <h4> MANAGE PRODUCTS</h4>
 
-                    <img class="card-image"
-                    src="data:image/png;base64,{{product.image}}" 
-                    alt="product_image"
-                    height="100px"
-                    width="100%"
-                    >
-                <!--card body-->
-                <div class="card-body">
-                <p class="card-title">{{product.name}}</p>
-                <p class="card-text">${{product.price}}</p>
-                <p class="card-text">Added by: {{product.user.firstName}}</p>
-                <!--delete and update -->
-                <div>
-                    <span (click)="editProduct(product)"  style="color:purple; font-weight: bold;" >
-                        <fa-icon [icon]="faEdit"  ></fa-icon>
-                        Edit&nbsp;
-                    </span>
-                    <span (click)="deleteProduct(product)" style="color:red; font-weight: bold;">&nbsp;
-                        <fa-icon [icon]="faTrash" ></fa-icon>
-                        Delete
-                    </span>
-                </div>
+  <!--row-->
+    <div class="row">
+
+                    <!--column-->
+            <div class="col-md" *ngIf="spinnerShown" style="height: 400px;">
+                <!--spinner/loader-->
+                <div  class="d-flex justify-content-center">
+                <div  class="spinner-border text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
             </div>
+            <!--column-->
+
+               <!--column /card-->
+            <div class="col-md-3 card" *ngFor="let product of products" style="margin:10px;">
+
+                <img class="card-image"
+                src="data:image/png;base64,{{product.image}}" 
+                alt="product_image"
+                height="100px"
+                width="100%"
+                >
+            <!--card body-->
+            <div class="card-body">
+            <p class="card-title">{{product.name}}</p>
+            <p class="card-text">${{product.price}}</p>
+            <p class="card-text">Added by: {{product.user.firstName}}</p>
+            <!--delete and update -->
+            <div>
+                <span (click)="editProduct(product)"  style="color:purple; font-weight: bold;" >
+                    <fa-icon [icon]="faEdit"  ></fa-icon>
+                    Edit&nbsp;
+                </span>
+                <span (click)="deleteProduct(product)" style="color:red; font-weight: bold;">&nbsp;
+                    <fa-icon [icon]="faTrash" ></fa-icon>
+                    Delete
+                </span>
+            </div>
+            </div>
+        </div>
+        <!--column/card-->
+
     </div>
+    <!--row-->
 
-    <mat-paginator
-    [length] = "length"
-    [pageSize] ="defaultRecords"
-     [pageSizeOptions]="[3,5, 10, 20]" 
-     
-    (page) ="pageEvent = $event; onPaginateChange($event)"
 
-    >
+    <!--row-->
+    <div class="row">
+        <!--col-->
+        <div class="col-md">
+            <!--nav-->  
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination  pg-teal justify-content-center">
+                    <li 
+                        class="page-item" 
+                        *ngFor="let p of pages; let i = index"
+                        [ngClass]="{ 'active': i == page }"
+                        >
+                        <a 
+                        class="page-link "
+                        mdbWavesEffect 
+                        (click)="setPage(i,$event)"
+                        >
+                         {{i}}
+                        </a>
+                    </li>
+                    </ul>
+                </nav>
+            <!--nav-->
+        </div>
+        <!--col-->   
+    </div>
+    <!--row-->
 
-    </mat-paginator>
+</div>
+<!--container-->
 
+
+
+
+   
 

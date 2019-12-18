@@ -11,3 +11,19 @@ font-weight: 1000 !important;
 .card-text{
 font-weight: 800 !important;
 }
+
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #007E33  !Important;
+    border: solid 1px #007E33  !Important;
+}
+
+.pagination > li > a
+{
+    color: black;
+    font-weight: bolder;
+    margin: 2px;
+    border: solid 1px #007E33  !Important;
+}

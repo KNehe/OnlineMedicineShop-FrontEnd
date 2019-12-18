@@ -18,17 +18,16 @@ export class AllProductsComponent implements OnInit {
   //font awesome icons
   faEdit = faEdit
   faTrash = faTrash
+
+  private spinnerShown:boolean = true;
   
   //products
   products:Product[] = [];
 
-  filteredProducts:Product[] = []
+  private page:number =0;
 
-  //length- for mat-paginator
-  length:number
-
-  //default number records for paginator - defines page size
-  defaultRecords:number = 3
+  private pages:number[] = [];
+  
 
   constructor(private productService:ManageProductsService,
                private sharedService:SharedService) {
@@ -39,26 +38,31 @@ export class AllProductsComponent implements OnInit {
   }
 
  
-  //pagination
-  onPaginateChange(data)
-  {
-   this.filteredProducts = this.products.slice(0,data.pageSize)
-  }
 
   //get all Products
   getAllProducts()
   {
     
-    return this.productService.getAllProducts().subscribe(
-      res=>{
-       this.products = res;
-       this.length = this.products.length //paginator record length
-       this.filteredProducts = this.products.slice(0,this.defaultRecords) //show only 3
+    return this.productService.getAllProducts(this.page) 
+    .subscribe(
+      result=>{
+       this.products = result['content'];
+       this.pages = new Array(result['totalPages']);
+       this.spinnerShown = false;
+      //  console.log(result);
       },
       error=>{
        console.log("All Products Component error: "+error.message);
       }
     );
+  }
+
+  //set clicked page number on pagination links
+  setPage(i:any,event:any)
+  {
+    event.preventDefault();
+    this.page = i;
+    this.getAllProducts();
   }
 
 
@@ -77,8 +81,8 @@ export class AllProductsComponent implements OnInit {
          this.productService.deleteProduct(product.id).subscribe(
            res=>
            {
-              let indexOfProduct = this.filteredProducts.indexOf(product)   
-              this.filteredProducts.splice(indexOfProduct,1)  
+              let indexOfProduct = this.products.indexOf(product)   
+              this.products.splice(indexOfProduct,1)  
               //alert(res)     
            },
            error=>

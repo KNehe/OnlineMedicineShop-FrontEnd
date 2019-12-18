@@ -3,13 +3,13 @@
     margin-left: 35px;
 }
 .form{
-    margin-top: 30px;
+    margin: 30px;
     padding: 10px !important;
 }
 
 .btn, .btn-primary{
     color: white !important;
-    background-color: black !important;
+    background-color: #007E33 !important;
     width: 50% !important;
     font-family: 'Lucida Sans';
 }

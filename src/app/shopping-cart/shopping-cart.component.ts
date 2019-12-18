@@ -67,9 +67,9 @@ export class ShoppingCartComponent implements OnInit {
 
 
   //get all products
-  getAllProducts()
+  getAllProducts() //requires pagination implementation
   {
-    this.service.getAllProducts().subscribe(
+    this.service.getAllProducts(0).subscribe(
       response=>{
         //hide the spinner
         this.spinnerShown = false
