@@ -53,7 +53,7 @@ export class AuthenticationService {
   }
 
   //checkRole
-  checkRole() : String
+  checkRole() : string
   {
     if(localStorage.getItem("role") == "ADMIN")
     {  
@@ -64,7 +64,6 @@ export class AuthenticationService {
       return "USER"
     }
   }
-
 
   removeSessionVariable()
   { 
@@ -99,6 +98,33 @@ export class AuthenticationService {
 
     return this.httpClient.post<string>(this.base_url+"/api/changePassword",model,{headers});
   }
+
+
+
+  //--will be used to display userName on navbar
+  //because there's no child/parent relationship between navbar and other components
+  private userFirstNameSource = new BehaviorSubject(null)
+  currentUserFirstName = this.userFirstNameSource.asObservable()
+
+  //used to change the above currentUserFirstName
+  //implemented in the NavBar component inside ngOnInit() and Login inside loadPage()
+  setUserFirstName(firstName:string)
+  {
+    this.userFirstNameSource.next(firstName);
+  }
+
+  //--will be used to display right link on navbar drop down
+  //because there's no child/parent relationship between navbar and other components
+  private userRoleSource = new BehaviorSubject(null)
+  currentUserRole= this.userRoleSource.asObservable()
+
+  //used to change the above status
+  //implemented in the NavBar component inside ngOnInit() and Login inside loadPage()
+  setUserRole(role:string)
+  {
+    this.userRoleSource.next(role);
+  }
+
 
  
 

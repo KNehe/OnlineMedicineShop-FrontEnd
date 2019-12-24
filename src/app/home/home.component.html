@@ -14,7 +14,7 @@
             </h2>
             <p class="text-font mb-4 pb-2 px-md-5 mx-md-5">Every body deserves a great life. 
               The easiest way to be happy is staying healthy and getting proper 
-              medicine when sick. We aim at building the future for our health
+              medicine when sick. We aim at building a better future for our health
             </p>
             <a
              mdbBtn 
@@ -23,7 +23,10 @@
             routerLink="/login" skipLocationChange
             class="hover"
             > 
-            <mdb-icon fas icon="clone" class="left"></mdb-icon>Get started</a>
+            <mdb-icon fas icon="clone" class="left"></mdb-icon>
+            <span *ngIf="isLoggedIn">Continue</span>
+            <span *ngIf="!isLoggedIn">Get started</span>
+             </a>
       
           </div>
         </div>

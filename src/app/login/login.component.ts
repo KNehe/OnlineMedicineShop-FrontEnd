@@ -90,6 +90,9 @@ export class LoginComponent implements OnInit {
            localStorage.setItem("role",res.role);
            localStorage.setItem("FirstName",res.firstname);
            
+           this.authService.setUserFirstName(res.firstname);
+           this.authService.setUserRole(res.role);
+           
           
            if(res.role == "ADMIN")
            {

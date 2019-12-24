@@ -38,6 +38,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { StatisticsComponent } from './manage-products/statistics/statistics.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -107,6 +108,10 @@ canActivate:[DeactivateGuard]
   component:LoginComponent
 },
 {
+  path:'profile',
+  component:ProfileComponent
+},
+{
   path:'**',
   component:NotFoundComponent
 },
@@ -134,7 +139,8 @@ canActivate:[DeactivateGuard]
     ConfirmModalComponent,
     EditModalComponent,
     DeleteModalComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ProfileComponent
     ],
   imports: [
     BrowserModule,

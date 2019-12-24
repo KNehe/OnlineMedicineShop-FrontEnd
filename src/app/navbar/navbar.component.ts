@@ -15,17 +15,27 @@ export class NavbarComponent implements OnInit {
   //set to false when user logs in
   //to hide register and login links
   //but show log out link
-  loggedIn = null
+  loggedIn:boolean = false;
 
+  userFirstName:string = null;
+  userRole:string = null;
 
   
-  number = null //shoping cart items
-  constructor(private authService:AuthenticationService,
-              private manageProductService:ManageProductsService) { }
+
+  constructor(private authService:AuthenticationService) { }
   
   ngOnInit() {
 
-    this.authService.currentStatus.subscribe( status => this.loggedIn = status)
+      
+    this.authService.currentUserRole
+    .subscribe(role => this.userRole = role);
+
+    this.authService
+    .currentUserFirstName
+    .subscribe(firstname => this.userFirstName = firstname);
+
+    this.authService.currentStatus
+    .subscribe( status => this.loggedIn = status)
          
   }
 
