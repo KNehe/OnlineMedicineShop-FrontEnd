@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Purchase } from 'src/app/models/purchase';
 import { ManageProductsService } from 'src/app/Services/manage-products.service';
 import { MatPaginator, MatTableDataSource ,MatSort} from '@angular/material';
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
+import { Orders } from 'src/app/models/Orders';
+import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
+import { ConfirmModalComponent } from 'src/app/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-view-orders',
@@ -10,30 +12,128 @@ import {faPhone} from '@fortawesome/free-solid-svg-icons'
   styleUrls: ['./view-orders.component.css']
 })
 export class ViewOrdersComponent implements OnInit {
-  
+   
   //font awesome
   faPhone = faPhone
 
-  purchases:Purchase[] = []
+  orders:Orders[] = []
   
   dataSource: MatTableDataSource<any>;
 
   //for mat-table
-  displayedColumns: string[] = ['id','customer.name','product.name','amount_paid','date_paid','product.user.phone','status',"Confirm"]; 
+  displayedColumns: string[] = ['Id',"customername","products","amountpaid","phone","date_paid","status","confirm"]; 
 
   @ViewChild(MatSort,{static:true}) sort:MatSort
   @ViewChild(MatPaginator,{static:true}) paginator:MatPaginator
 
 
   //search value
-  searchKey:String
+  searchKey:string;
+  
+  //used to hide and show a spinner
+  //when user gets to this view
+  //spinner is hidden when data is loaded
+  spinnerShown:boolean = true;
 
-  constructor(private service:ManageProductsService) {
+  //used to show progress when confirming a delivery
+  confirmSpinnerShown:boolean = false;
+
+  //confirm message
+  confirmMessage:String = null;
+
+  //reference to MDB modal
+  modalRef:MDBModalRef;
+
+  //
+  delivered:string = "Delivered";
+  notdelivered:string ="Not Delivered";
+
+  //when no orders found
+  //meaning no customer has bought an Admin's products
+  //show this message
+  noPurchaseMade:string = null;
+
+  constructor(private service:ManageProductsService,private  modalService:MDBModalService) {
      
    }
 
   ngOnInit() {
-    this.getAllPurchases()
+    this.getAllPurchases()    
+  }
+
+  openConfirmModal(selectedOrder:Orders): void
+  { 
+    //heading and description
+    let heading:string = null;
+    let  description:String = null;
+
+    if(selectedOrder.status == this.delivered)
+    {
+      heading = "CANCEL DELIVERY";
+      description = "Are you sure you want to cancel delivery";
+
+    }else if(selectedOrder.status == this.notdelivered)
+    {
+      heading = "CONFIRM DELIVERY";
+      description = "Are you sure you want to confirm delivery";
+    }
+
+    this.modalRef = this.modalService.show(ConfirmModalComponent,{
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: false,
+        ignoreBackdropClick: false,
+        animated: true,
+        data: {
+          heading: heading,
+          content: {
+             heading: 'Content heading', 
+             description: description}
+      }
+    });
+
+    this.modalRef.content.action.subscribe(
+       (result: any) => { 
+       
+        if(result == "yes")
+        { 
+          // return alert(selectedOrder.user_id +" "+ selectedOrder.date_paid);
+          this.confirmSpinnerShown = true;
+          this.updatePurchaseStatus(selectedOrder);        
+        }
+      
+        });
+
+  }//open dialog
+
+
+  //update purchase status
+  updatePurchaseStatus(order:Orders)
+  { 
+
+    if(order.status == this.notdelivered)
+    {
+      order.status = "Delivered";
+
+    }else if (order.status == this.delivered)
+    {
+      order.status = "Not Delivered";
+
+    }
+
+    this.service.updatePurchaseStatus(order)
+    .subscribe(
+     result =>{
+       this.confirmSpinnerShown = false;
+       this.confirmMessage = order.status+" to " + order.firstname + " " +order.lastname;
+     },
+     error=>
+     {
+       this.confirmSpinnerShown = false;
+       console.log("update error", error);
+     }
+    );
     
   }
 
@@ -42,16 +142,22 @@ export class ViewOrdersComponent implements OnInit {
    this.service.getAllPurchases()
    .subscribe(
      response=>{
-       this.purchases = response
-       //console.log(JSON.parse(JSON.stringify(this.purchases)))
-       this.dataSource = new MatTableDataSource(this.purchases)
+       this.spinnerShown = false;
+       this.orders = response
+      //  console.log(JSON.parse(JSON.stringify(this.orders)))
+       this.dataSource = new MatTableDataSource(this.orders)
        //custom mat table sort function
-       this.sortDataAccessor()
+      //  this.sortDataAccessor()
        this.dataSource.sort = this.sort
        this.dataSource.paginator = this.paginator
+
+       if(this.orders == null || this.orders.length == 0)
+       {
+         this.noPurchaseMade = "No customer has bought your products";
+       }
      },
      error=>{
-
+        this.spinnerShown = false;
      }
    );
   }//getAllPurchases
@@ -59,35 +165,18 @@ export class ViewOrdersComponent implements OnInit {
   clearSearch()
   {
     this.searchKey = ""
-    this.filterTable()
+    this.applyFilter();
+    // clear message
+    this.confirmMessage = null;
   }
 
-  //filter table
-  filterTable()
-  {
-    this.dataSource.filterPredicate = function(data, filter: string): boolean {
-    return   data.product.name.toLowerCase().includes(filter) 
-            || data.user.firstName.toLowerCase().includes(filter) 
-            || data.user.lastName.toLowerCase().includes(filter)
-            || data.date_paid.toLowerCase().includes(filter) 
-            || data.user.phone.toLowerCase().includes(filter)
-     };
-  
-     this.dataSource.filter = this.searchKey.trim().toLowerCase()
+  applyFilter():void
+  { 
+    // clear message
+    this.confirmMessage = null;
+    this.dataSource.filter = this.searchKey.toLowerCase().trim();
   }
 
 
-  //custom mat table sorter
-  sortDataAccessor()
-  {
-    this.dataSource.sortingDataAccessor = (item,property) =>{
-      switch(property){
-        case 'product.name': return item.product.name
-        case 'customer.name': return item.user.firstName
-        case 'product.user.phone': return item.product.user.phone
-        default: return item[property]
-      }
-    };
-  }
 
-}
+ }

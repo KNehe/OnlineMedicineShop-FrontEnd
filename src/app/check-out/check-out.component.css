@@ -6,4 +6,8 @@
     color:red;
 }
 
-/* .md-form , .form-sm input[type=text]:focus:not([readonly]) + label { color: #007E33 !important; } */
+
+input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid rgb(6, 175, 6) !important;
+    box-shadow: 0 1px 0 0 rgb(6, 175, 6) !important; 
+}

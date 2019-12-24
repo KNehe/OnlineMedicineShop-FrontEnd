@@ -1,0 +1,116 @@
+<!--container-->
+<div class="container">
+    <!--row-->
+    <div class="row">
+          <!--column-->
+          <div class="col-md" style="margin:5px;">
+            
+                      <!--modal header-->
+                      <div class="modal-header">
+                            <button type="button" 
+                            class="close pull-right"
+                             arial-label="close"
+                             (click)="mdbModalRef.hide()"
+                            >
+                                  <span arial-hidden="true">x</span>
+                            </button>  
+                            <h4 class="modal-title w-100">
+                                  Edit Product
+                            </h4>                            
+                      </div>
+                      <form #f="ngForm" (ngSubmit)=" f.valid &&  editProduct()" class="form modal-body">
+
+                            <!-- input product image -->
+                            <div class="md-form formInput text-center">
+                                  <input 
+                                  style="display: none"
+                                  type="file" 
+                                  (change)="onFileSelected($event)"
+                                  #fileInput
+                                  >    
+                                  <button 
+                                  type="button"
+                                  style="border: none; border-radius: 100%; width: 150px; height: 100px;"
+                                  (click)="fileInput.click()"
+                                  >Pick a new product image
+                                  </button>
+                      
+                                  <div >
+                                        <small class="text-info" *ngIf="imageName"> {{imageName}} </small>
+                                  </div>     
+                                  
+                            </div>              
+                                  <!-- input product name -->
+                                  <div class="md-form formInput">
+                                        <mdb-icon fas icon="envelope" style="color:green"></mdb-icon>
+                                        <label for="productname">Product Name</label>
+                                        <input type="text" name="productname" id="productname" class="form-control"
+                                        
+                                        [(ngModel)]="model.name"
+                                        #productname = "ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && productname.invalid}"
+                                        required
+                                        />
+                                        <div *ngIf="f.submitted && productname.invalid" class="invalid-input">
+                                        <small *ngIf="productname.errors?.required">Field is required</small>
+                                        </div>
+                                  </div>
+                      
+                                        <!-- input product price -->
+                                  <div class="md-form formInput">
+                                    <mdb-icon fas icon="envelope" style="color:green"></mdb-icon>
+                                        <label for="productprice">Product price</label>
+                                        <input type="text" name="productprice" id="productprice" class="form-control"
+                                        [(ngModel)]="model.price"
+                                        #productprice = "ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && productprice.invalid}"
+                                        required
+                                        />
+                                        <div *ngIf="f.submitted && productprice.invalid" class="invalid-input">
+                                        <small *ngIf="productprice.errors?.required">Field is required</small>
+                                        </div>
+                                  </div>
+                      
+                            <!-- buttons -->
+                                  <div class="modal-footer">
+                                        <button 
+                                        type="button" 
+                                        mdbBtn
+                                        color="success"
+                                        class="waves-light btn-sm" aria-label="Close"
+                                         type="submit" name="submit">
+                                         Modify
+                                        </button>
+
+                                        <button 
+                                         mdbWavesEffect
+                                         type="button" 
+                                         mdbBtn
+                                         color="default" 
+                                         class="relative waves-light btn-sm" 
+                                         (click)="mdbModalRef.hide()" >
+                                         Cancel
+                                        </button>
+                                        
+
+                                  </div>
+                      
+                            <!-- sucess message -->
+                            <div class="text-center">
+                                  <p *ngIf="successMessage" class="text-success">
+                                        <b>{{successMessage}}</b>
+                                  </p>
+                                  <p *ngIf="errorMessage" class="text-danger">
+                                        <b>{{errorMessage}}</b>
+                                  </p>
+                            </div>
+                      </form>
+            
+          </div>
+          <!--column-->
+    </div>
+    <!--row-->
+
+</div>
+<!--container-->    
+

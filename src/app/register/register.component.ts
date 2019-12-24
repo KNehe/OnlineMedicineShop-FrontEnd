@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 	  email:'',
 	  password:'',
 	  phone:'',
-	  role:'User'
+	  role:''
   }
 
   //login model
@@ -33,6 +33,9 @@ export class RegisterComponent implements OnInit {
 
   loginViewModel:LoginViewModel;
 
+  //used to hide and show spinner
+  spinnerShown:boolean = false;
+
   constructor(private authService:AuthenticationService,
               private router:Router) { }
 
@@ -42,11 +45,14 @@ export class RegisterComponent implements OnInit {
   //register user
   register()
   {
-
+    //show spinner
+    this.spinnerShown = true;
     this.authService.registerUser(this.model)
     .subscribe(
       response =>{
-        
+        //hide spinner
+        this.spinnerShown = false;
+
         let responseToJson = JSON.stringify(response)
 
         let authToken  = JSON.parse(responseToJson).token
@@ -57,7 +63,9 @@ export class RegisterComponent implements OnInit {
 
       },
       error=>{
-        this.errorMessage = error.message
+        this.spinnerShown = false;
+      
+        this.errorMessage = error.error
       }
     );
   }//register

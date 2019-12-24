@@ -65,6 +65,13 @@
                                         <div class="text-center">
                                                <button class="btn btn-primary" type="submit" name="submit">Add product</button>
                                         </div>
+
+                                           <!--spinner/loader-->
+                                    <div *ngIf="spinnerShown" class="d-flex justify-content-center">
+                                          <div  class="spinner-border text-success" role="status">
+                                          <span class="sr-only">Saving product you in...</span>
+                                          </div>
+                                    </div>
                                
                                      <!-- sucess message -->
                                      <div class="text-center">

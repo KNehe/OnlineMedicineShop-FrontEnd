@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageProductsService } from '../../Services/manage-products.service';
 import { Product } from '../../models/product';
-import { SharedService } from '../../Services/shared.service';
 import { faEdit , faTrash} from '@fortawesome/free-solid-svg-icons';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { EditModalComponent } from 'src/app/edit-modal/edit-modal.component';
+import { Router } from '@angular/router';
+import { DeleteModalComponent } from 'src/app/delete-modal/delete-modal.component';
 
 
 
@@ -23,14 +26,23 @@ export class AllProductsComponent implements OnInit {
   
   //products
   products:Product[] = [];
-
+ 
   private page:number =0;
 
   private pages:number[] = [];
+
+  //reference to MDB modal
+  mdbModalRef:MDBModalRef;
+
+  //to be shown if an admin has just created an account
+  //and hasn't created any product
+  //or when he has deleted all products
+  noProductsMessage:String = null;
   
 
   constructor(private productService:ManageProductsService,
-               private sharedService:SharedService) {
+               private mdbModalService:MDBModalService,
+               private router:Router) {
                }
    
   ngOnInit() {
@@ -49,6 +61,11 @@ export class AllProductsComponent implements OnInit {
        this.products = result['content'];
        this.pages = new Array(result['totalPages']);
        this.spinnerShown = false;
+       
+       if(this.products == null || this.products.length == 0)
+       {
+         this.noProductsMessage = "You have no products in store!";
+       }
       //  console.log(result);
       },
       error=>{
@@ -58,48 +75,83 @@ export class AllProductsComponent implements OnInit {
   }
 
   //set clicked page number on pagination links
-  setPage(i:any,event:any)
+  setPage(index:any,event:any)
   {
     event.preventDefault();
-    this.page = i;
+    this.page = index;
     this.getAllProducts();
   }
 
-
-  //delete a product
   deleteProduct(product:Product)
   { 
-    //show a confirm to the user
-    this.sharedService.openConfirmDialog("Are Sure you want to delete: "+ product.name + " ?")
-    .afterClosed()
-    .subscribe(
-      res=>{
-        //res returns a boolean
-        //delete if true
-        if(res)
-        {
-         this.productService.deleteProduct(product.id).subscribe(
-           res=>
-           {
-              let indexOfProduct = this.products.indexOf(product)   
-              this.products.splice(indexOfProduct,1)  
-              //alert(res)     
-           },
-           error=>
-           {
-             console.log("Delete product error: "+error.message())
-           }
-         )
-        }//if
-      }//res
-    );
-  }//delete method
+    this.mdbModalRef = this.mdbModalService.show(DeleteModalComponent,{
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      animated: true,
+      data: {
+        heading: "Confirm Deletion",
+        content: {
+           heading: 'Content heading', 
+           description: "Are sure you want to delete "+ product.name}
+    }
+  });//show
+
+   this.mdbModalRef.content.action
+   .subscribe(
+     (result:any )=>{
+       if(result == "yes")
+       {
+        this.productService.deleteProduct(product.id).subscribe(
+          res=>
+          {
+             let indexOfProduct = this.products.indexOf(product);
+             this.products.splice(indexOfProduct,1);     
+          },
+          error=>
+          {
+            console.log("Delete product error: "+error.message())
+          }
+        )
+         
+       }//if
+     }
+   );
+  }
 
   //edit a product
   editProduct(product:Product)
   {
-    this.sharedService.openEditDailog(product);
-  }
+    this.mdbModalRef = this.mdbModalService.show(EditModalComponent,{
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      animated: true,
+      data: {
+        product:product
+    }
+  });
   
+  this.mdbModalRef.content.action
+  .subscribe( 
+    (result:any)=>{
+
+      if(result == "yes") 
+      { 
+        //not working
+        this.router.navigate(["/manageproducts"],{skipLocationChange:true});
+      }
+    
+    }
+  
+  );
+   
+  }//edit product
+
+
 
 }

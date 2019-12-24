@@ -47,6 +47,11 @@ export class ShoppingCartComponent implements OnInit {
     user:{id:0,firstName:'',lastName:'',email:'',password:'',phone:'',role:''},
     status:"Not Delivered"
   }
+  
+  //for pagination
+  private page:number =0;
+
+  private pages:number[] = [];
 
   constructor(private service:ManageProductsService,
               private snackbar:MatSnackBar,
@@ -69,7 +74,7 @@ export class ShoppingCartComponent implements OnInit {
   //get all products
   getAllProducts() //requires pagination implementation
   {
-    this.service.getAllProducts(0).subscribe(
+    this.service.getAllProducts2(this.page).subscribe(
       response=>{
         //hide the spinner
         this.spinnerShown = false
@@ -77,12 +82,21 @@ export class ShoppingCartComponent implements OnInit {
         //just in case user had paid for a product earlier
         //it is set when a user pays successfully for items ->CheckOutComponent->purchase()
         localStorage.removeItem("Paid")
-        this.products = response
+        this.products = response["content"];
+        this.pages = new Array(response['totalPages']);
       },
       error=>{
           
       }
     );
+  }
+
+  //set clicked page number on pagination links
+  setPage(index:any,event:any)
+  {
+    event.preventDefault();
+    this.page = index;
+    this.getAllProducts();
   }
 
   //toggle between add / remove to cart

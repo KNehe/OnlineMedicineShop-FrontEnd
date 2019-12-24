@@ -1,0 +1,25 @@
+<!--container-->
+<div class="container">
+    <!--row-->
+    <div class="row">
+        <!--column-->
+        <div class="col-md">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">{{heading}}</h4>
+              </div>
+              <div class="modal-body">
+                {{content.description}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" mdbBtn color="default" class="waves-light btn-sm" aria-label="Close" (click)="modalRef.hide()" mdbWavesEffect>No</button>
+                <button type="button" mdbBtn color="success" class="relative waves-light btn-sm"  mdbWavesEffect (click)=" onYesClick()">Yes</button>
+              </div>
+        </div>
+        <!--column-->
+    </div>
+    <!--row-->
+</div>
+<!--container-->

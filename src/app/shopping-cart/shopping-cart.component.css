@@ -9,3 +9,19 @@
  background-color: #00c853 !important;
  color: white !important;
 }
+
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #007E33  !Important;
+    border: solid 1px #007E33  !Important;
+}
+
+.pagination > li > a
+{
+    color: black;
+    font-weight: bolder;
+    margin: 2px;
+    border: solid 1px #007E33  !Important;
+}

@@ -1,0 +1,132 @@
+<!--container-->
+<div class="container">
+
+    <!--row-->
+    <div class="row" *ngIf="spinnerShown">
+         <!--col-->
+         <div class="col-md-12" style="height: 300px;">
+            <!--spinner/loader-->
+          <div class="d-flex justify-content-center" style="margin-top: 50px;">
+              <div  class="spinner-border text-success" role="status">
+                <span class="sr-only">Logging you in...</span>
+              </div>
+          </div>
+       </div>
+       <!--col-->
+    </div>
+    <!--row-->
+
+
+    <!--row-->
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-12"></div>
+    </div>
+    <!--row-->
+
+
+
+    <!--row-->
+    <div class="row" style="padding:5px; margin: 5px;" *ngIf="!spinnerShown">
+
+          <!--col-->
+          <div class="col">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        <span class="badge badge-success"  style="font-size: larger;">
+                            {{statistics.allProducts}}
+                        </span>
+                    </h4>
+                    <p class="card-text" style="font-weight: bold;">All Products Created By Admins</p>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+
+         <!--col-->
+         <div class="col">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        <span class="badge badge-success"  style="font-size: larger;">
+                            {{statistics.allProductsById}}
+                        </span>
+                    </h4>
+                    <p class="card-text" style="font-weight: bold;">All Products You Created</p>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+
+         <!--col-->
+         <div class="col" style=" margin: 5px">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        <span class="badge badge-success"  style="font-size: larger;">
+                            {{statistics.allPurchases}}
+                        </span>
+                    </h4>
+                    <p class="card-text" style="font-weight: bold;">All Purchases</p>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+    </div>
+    <!--row-->
+
+
+
+
+
+     <!--row-->
+     <div class="row" style="padding:5px; margin: 5px;" *ngIf="!spinnerShown">
+       <!--col-->
+         <div class="col">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        <span class="badge badge-success"  style="font-size: larger;">
+                            {{statistics.allPurchasesById}}
+                        </span>
+                    </h4>
+                    <p class="card-text" style="font-weight: bold;">Purchases Of Products You Created</p>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+
+         <!--col-->
+         <div class="col">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        <span class="badge badge-success"  style="font-size: larger;">
+                            {{statistics.allDeliveredProducts}}
+                        </span>
+                    </h4>
+                    <p class="card-text" style="font-weight: bold;">Purchased Products Delivered To Customers</p>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+
+         <!--col-->
+         <div class="col" style=" margin: 5px">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        <span class="badge badge-success"  style="font-size: larger;">
+                            {{statistics.allNotDeliveredProducts}}
+                        </span>
+                    </h4>
+                    <p class="card-text" style="font-weight: bold;">Purchased Products Not Delivered To Customers</p>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+    </div>
+    <!--row-->
+
+</div>
+<!--container-->

@@ -1,11 +1,6 @@
-/*.formh{
-    margin-top:150px !important;
-    margin-bottom:200px !important;
-   }*/
-   
    .form{
-       height: 350px !important;
        padding: 10px !important;
+       margin-bottom: 50px !important;
    }
 
    .fa{
@@ -31,7 +26,14 @@
 }
 .btn-primary
 {
-    background-color:  rgb(8, 8, 8) !important ;
-    margin-top: 30px !important;
-    width: 100% !important;
+    background-color:  #007E33 !important ;
+    margin-top: 10px !important;
+    width: 50% !important;
 }
+
+input[type=password]:focus:not([readonly]) {
+    border-bottom: 1px solid rgb(6, 175, 6) !important;
+    box-shadow: 0 1px 0 0 rgb(6, 175, 6) !important; 
+}
+
+

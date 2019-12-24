@@ -16,7 +16,7 @@ export class CustomHttpInterceptor implements HttpInterceptor
         .pipe(
 
             //retry on failure
-            retry(2),
+            retry(1),
 
             //handle errors
             catchError(( error: any)=>{

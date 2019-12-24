@@ -5,31 +5,72 @@
     <div class="row">
 
      <!--column-->
-    <div class="col-md z-depth-1-half" style=" margin-top:30px;">
+    <div class="col-md z-depth-1-half " style=" margin-top:30px;">
 
-   <!-- items-->
-    <ul style="margin-top: 10px;">
-            <li class="list-item">
+   <!-- navigation items-->
+    <ul 
+    class="nav justify-content-center" 
+    style="margin-top: 10px;" 
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="5px"
+     fxLayoutGap.xs="5px"
+    >
+     
+            <li
+            fxFlex
+            class="list-item"
+            [ngClass]="{'activeLink': dashboardActive == true}"
+            (click)="makeActive(dashboard)"
+            >
+                    <a [routerLink]="[{ outlets: {rightdiv: [''] } }]" skipLocationChange>
+                        <fa-icon [icon]="faDatabase" size="1x" class="icon" ></fa-icon>
+                        Dashboard
+                    </a>
+            </li>
+
+            <li
+            fxFlex
+             class="list-item"
+            [ngClass]="{'activeLink': addProductActive == true}"
+            (click)="makeActive(add)"
+            >
                     <a [routerLink]="[{ outlets: {rightdiv: ['addProduct'] } }]" skipLocationChange>
                         <fa-icon [icon]="faBook" size="1x" class="icon"></fa-icon>
                         Add Product
                     </a>
             </li>
-        <li class="list-item">
-            <a [routerLink]="[{ outlets: {rightdiv: ['']} }]" skipLocationChange>
+        <li 
+            fxFlex
+            class="list-item"
+            [ngClass]="{'activeLink': manageProductActive == true}"
+            (click)="makeActive(manage)"
+            >
+            <a [routerLink]="[{ outlets: {rightdiv: ['manageproducts']} }]" skipLocationChange>
             <fa-icon [icon]="faEdit" size="1x" class="icon icon-color"></fa-icon>
                 Manage Products
             </a>
         </li>
 
-        <li class="list-item">
+        <li 
+          fxFlex
+          class="list-item"
+          [ngClass]="{'activeLink': viewOrdersActive == true}"
+          (click)="makeActive(vieworders)"
+          >
             <a [routerLink]="[{ outlets: {rightdiv: ['vieworders'] } }]" skipLocationChange>
                 <fa-icon [icon]="faBookOpen" size="1x" class="icon"></fa-icon>
                 View orders
             </a>
         </li>
 
-        <li class="list-item">
+        <li 
+        fxFlex
+        class="list-item"
+        [ngClass]="{'activeLink': settingsActive == true}"
+        (click)="makeActive(settings)"
+        >
             <a [routerLink]="[{ outlets: {rightdiv: ['settings']}}]" skipLocationChange>
                 <fa-icon [icon]="faCogs" size="1x" class="icon"></fa-icon>
                 Settings

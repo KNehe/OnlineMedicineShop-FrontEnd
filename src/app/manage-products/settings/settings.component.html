@@ -1,13 +1,15 @@
-<h4>settings</h4>
+<!--container-->
+<div class="container">
+  <h4>settings</h4>
 
  <!-- row -->
- <div class="row">
+ <div class="row" >
     <!-- column -->
-    <div class="col-sm-3 col-md-3 col-lg-3"></div>
+    <div class="col-md"></div>
 
-  <div class="col-sm-6 col-md-6 col-lg-6 formh">
+  <div class="col-md">
            <!-- form -->
-  <form class=" z-depth-1-half form" #f = "ngForm" (ngSubmit)=" f.valid && changePassword()" method="POST">
+  <form class="form" #f = "ngForm" (ngSubmit)=" f.valid && changePassword()" method="POST">
           <!--  error -->
           <small *ngIf="errorMessage" class="text-danger text-center ">{{errorMessage}}</small>
            <!--  error -->
@@ -15,7 +17,7 @@
         
         <!-- input password -->
         <div class="md-form formInput">
-            <i class="fa fa-lock prefix"></i>
+           <mdb-icon fas icon="lock" class="green-text pr-3"></mdb-icon>
             <label for="password">Your new password</label>
             <input type="password" name="password" id="password"  class="form-control" 
             [(ngModel)]="model.newPassword"
@@ -29,7 +31,7 @@
         </div>
          <!-- input password -->
          <div class="md-form formInput">
-          <i class="fa fa-lock prefix"></i>
+          <mdb-icon fas icon="lock" class="green-text pr-3"></mdb-icon>
           <label for="confirmPassword">Confirm password</label>
           <input type="password" name="confirmPassword" id="confirmPassword"  class="form-control" 
           [(ngModel)]="model.confirmPassword"
@@ -43,15 +45,26 @@
       </div>
 
         <!-- button -->
-        <div class="text-center " style="margin: auto">
+        <div class="text-center ">
              <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+        </div>
+
+          <!--spinner/loader-->
+          <div *ngIf="spinnerShown" class="d-flex justify-content-center">
+            <div  class="spinner-border text-success" role="status">
+              <span class="sr-only">Logging you in...</span>
+            </div>
         </div>
         
     </form>
     <!-- form -->
   </div>
 
-  <div class="col-sm-3 col-md-3 col-lg-3"></div>
+  <div class="col-md"></div>
   <!-- column-->
 </div>
 <!-- row -->
+
+
+</div>
+<!--container-->

@@ -1,5 +1,7 @@
 <!--container-->
-<div class="container-fluid">
+<div class="container">
+
+  <h4> VIEW ORDERS</h4>
 
   <!--row-->
   <div class="row">
@@ -20,19 +22,13 @@
     <!--col-->
     <div class="col-md">
 
-      <!-- <div class="col-md-6 mx-auto">
-        <div class="md-form">
-          <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="searchItems()" id="search-input"
-                 mdbInput>
-          <label for="search-input">Search</label>
-        </div>
-      </div> -->
 
      <!--table-->
-     <div class="table-responsive-sm">
+     <div class="table-responsive-sm" *ngIf="!spinnerShown">
+
           <!--search -->
           <mat-form-field floatLabel="never" class="search-input">
-              <input matInput [(ngModel)] ="searchKey" placeholder="Search" autocomplete="off" (keyup)="filterTable()">
+              <input matInput [(ngModel)] ="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
           </mat-form-field>
 
           <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="clearSearch()">
@@ -40,67 +36,101 @@
           </button>
           <!--search -->
 
+          <h4 class="text-success">{{confirmMessage}}</h4>
+          <h5 *ngIf="noPurchaseMade" class="text-success"><b>{{noPurchaseMade}}</b></h5>
+
       <!--mat table-->
-      <table mat-table  [dataSource] = "dataSource" matSort>
-           <!-- Name Column -->
-           <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef  mat-sort-header> <b>Id </b></th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <table mat-table  [dataSource] = "dataSource" 
+       class="table"  striped="true" hover="true"
+      small="true">
+      
+      
+         <!-- Id Column -->
+           <ng-container matColumnDef="Id">
+              <th mat-header-cell *matHeaderCellDef  > <b>Id </b></th>
+              <td mat-cell *matCellDef="let element">{{element.id}}</td>
            </ng-container>
 
-           <!-- Customer Name -->
-           <ng-container matColumnDef="customer.name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
-                  <td mat-cell *matCellDef="let element"> {{element.user.firstName}} {{element.user.lastName}} </td>
+            <!-- Name Column -->
+            <ng-container matColumnDef="customername">
+                  <th mat-header-cell *matHeaderCellDef   > <b> Customer Name</b></th>
+                  <td mat-cell *matCellDef="let element">{{element.firstname}} {{element.lastname}}</td>
             </ng-container>
 
-           <!-- Product name Column -->
-           <ng-container matColumnDef="product.name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header > <b>Product Name </b> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>
-           </ng-container>
+               <!-- Products Column -->
+           <ng-container matColumnDef="products">
+            <th mat-header-cell *matHeaderCellDef   > <b>Products</b> </th>
+            <td mat-cell *matCellDef="let element">{{element.products}}</td>
+          </ng-container>
 
+          
             <!-- Amount Paid Column -->
-            <ng-container matColumnDef="amount_paid">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header > <b>Amount Paid </b> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.amount_paid}} </td>
+            <ng-container matColumnDef="amountpaid">
+                  <th mat-header-cell *matHeaderCellDef   > <b>Amount Paid</b> </th>
+                  <td mat-cell *matCellDef="let element">{{element.amount_paid}}</td>
             </ng-container>
 
-             <!-- Customer Phone Number Column -->
-             <ng-container matColumnDef="product.user.phone">
-                  <th mat-header-cell  *matHeaderCellDef  mat-sort-header><b> Contact </b> </th>
-                  <td mat-cell *matCellDef="let element">
-                       {{element.product.user.phone}} 
-                      </td>
+              <!-- Customer Phone Number Column -->
+              <ng-container matColumnDef="phone">
+                  <th mat-header-cell  *matHeaderCellDef   ><b> Contact </b> </th>
+                  <td mat-cell *matCellDef="let element">{{element.phone}}</td>
             </ng-container> 
+
+            
+                 <!-- Date paid Column -->
+                 <ng-container matColumnDef="date_paid">
+                  <th mat-header-cell *matHeaderCellDef   > <b>Date Paid</b> </th>
+                  <td mat-cell *matCellDef="let element">{{element.date_paid | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
 
             <!-- Amount Paid Column -->
             <ng-container matColumnDef="status" style="margin:2px">
-                  <th mat-header-cell  *matHeaderCellDef mat-sort-header> Status </th>
-                  <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                  <th mat-header-cell  *matHeaderCellDef  > Status </th>
+                  <td mat-cell *matCellDef="let element">{{element.status}}</td>
             </ng-container>
-
-            <!-- Date paid Column -->
-            <ng-container matColumnDef="date_paid">
-              <th mat-header-cell  *matHeaderCellDef mat-sort-header> Date Paid </th>
-              <td mat-cell *matCellDef="let element"> {{element.date_paid | date: 'dd/MM/yyyy'}} </td>
-           </ng-container>
+      
 
            <!-- Confirm Column -->
-           <ng-container matColumnDef="Confirm">
-              <th mat-header-cell  *matHeaderCellDef mat-sort-header> Confirm </th>
-              <td mat-cell *matCellDef="let element">
-                <button class="btn btn-success btn-sm">Confirm</button>
-              </td>
-        </ng-container>
+           <ng-container matColumnDef="confirm">
+              <th mat-header-cell  *matHeaderCellDef  >
+                 Confirm Delivery
+                  <!--spinner/loader-->
+                  <div class="col-md" *ngIf="confirmSpinnerShown">
+                      <div class="d-flex justify-content-center">
+                        <div  class="spinner-border text-success " role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                      </div>
+                  </div>
+                  <!--spinner/loader-->
+                </th>
 
+              <td mat-cell *matCellDef="let element">
+                <button 
+                 class="btn btn-success btn-sm"
+                 (click)="openConfirmModal(element)"
+                 *ngIf="element.status == notdelivered" 
+                >
+                  {{element.status}}
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-outline-success waves-effect btn-sm" 
+                  *ngIf="element.status == delivered" 
+                  (click)="openConfirmModal(element)"                         
+                >
+                  {{element.status}}
+                </button>
+              </td>
+
+        </ng-container>
 
            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <!--mat table-->
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-     >
+     
      </div>
      <!--table-->
     </div>

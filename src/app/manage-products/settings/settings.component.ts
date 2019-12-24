@@ -27,21 +27,26 @@ export class SettingsComponent implements OnInit {
    static:false
   })form:NgForm
 
+  spinnerShown:boolean = false;
+
    changePassword()
   {
-
+     this.spinnerShown = true;
     if(this.model.newPassword != this.model.confirmPassword)
-    {
+    { 
+      this.spinnerShown = false;
+      this.successMessage = null;
       return this.errorMessage = "Passwords don't match"
     }
 
-    this.model.userId = parseInt(sessionStorage.getItem("userid"))
+    this.model.userId = parseInt(localStorage.getItem("userid"))
 
     this.authService.changePassword(this.model)
     .subscribe(
       response=>{
+        this.spinnerShown = false;
         this.errorMessage = null
-        this.form.reset()
+        this.form.resetForm();
         this.successMessage = response
       },
       error=>{

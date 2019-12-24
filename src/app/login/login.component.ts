@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
            localStorage.setItem("role",res.role);
            localStorage.setItem("FirstName",res.firstname);
            
-
+          
            if(res.role == "ADMIN")
            {
             this.router.navigate(["/manageproducts"],{skipLocationChange: true});

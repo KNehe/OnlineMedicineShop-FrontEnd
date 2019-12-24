@@ -91,6 +91,34 @@
 </div>
 <!--row-->
 
+   <!--Paginaiton row-->
+   <div class="row">
+    <!--col-->
+    <div class="col-md">
+        <!--nav-->  
+            <nav aria-label="Page navigation example">
+                <ul class="pagination  pg-teal justify-content-center">
+                <li 
+                    class="page-item" 
+                    *ngFor="let p of pages; let i = index"
+                    [ngClass]="{ 'active': i == page }"
+                    >
+                    <a 
+                    class="page-link "
+                    mdbWavesEffect 
+                    (click)="setPage(i,$event)"
+                    >
+                     {{i}}
+                    </a>
+                </li>
+                </ul>
+            </nav>
+        <!--nav-->
+    </div>
+    <!--col-->   
+</div>
+<!--Paginaiton row-->
+
 
 
 </div>

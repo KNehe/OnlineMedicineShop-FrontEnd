@@ -2,7 +2,8 @@ ul{
     list-style-type: none;
 }
 ul li{
-    display: inline-block;
+    display: block;
+    float: left;
 }
 ul li a{
     color: black;
@@ -15,17 +16,30 @@ ul li a{
 .list-item{
     margin: 5px;
     padding: 5px !important;
-    font-size: 20px;
+    font-size: 15px;
     font-family: Robot;
 }
 
 /*when hover list item above*/
 .list-item:hover{
-    font-size: 15px;
+    font-size: 10px;
     font-weight: bold;
 }
 
 /*font awesome icon*/
 .icon{
     color:  rgb(32, 116, 32)  !important;
+}
+
+/*when a list item is clicked*/
+.activeLink{
+    background-color: rgba(42, 114, 71, 0.767) !important;
+    display: block;
+}
+.activeLink  a{
+    color: white !important;
+    display: block;
+}
+.activeLink  .icon{
+    color: white !important;
 }

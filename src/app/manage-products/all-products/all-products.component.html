@@ -3,8 +3,20 @@
 
     <h4> MANAGE PRODUCTS</h4>
 
+    
   <!--row-->
-    <div class="row">
+  <div class="row" *ngIf="noProductsMessage">
+      <!--column-->
+      <div class="col-md" style="height: 400px;">
+          <h5 class="text-center text-danger">{{noProductsMessage}}</h5>
+      </div>
+      <!--column-->
+
+  </div>
+  <!--row-->
+
+  <!--row-->
+  <div class="row">
 
                     <!--column-->
             <div class="col-md" *ngIf="spinnerShown" style="height: 400px;">
@@ -33,11 +45,11 @@
             <p class="card-text">Added by: {{product.user.firstName}}</p>
             <!--delete and update -->
             <div>
-                <span (click)="editProduct(product)"  style="color:purple; font-weight: bold;" >
+                <span (click)="editProduct(product)"  style="color:rgb(17, 77, 17); font-weight: bold;" >
                     <fa-icon [icon]="faEdit"  ></fa-icon>
                     Edit&nbsp;
                 </span>
-                <span (click)="deleteProduct(product)" style="color:red; font-weight: bold;">&nbsp;
+                <span (click)="deleteProduct(product)" style="color:rgb(148, 21, 21); font-weight: bold;">&nbsp;
                     <fa-icon [icon]="faTrash" ></fa-icon>
                     Delete
                 </span>
@@ -50,7 +62,7 @@
     <!--row-->
 
 
-    <!--row-->
+    <!--Pagination row-->
     <div class="row">
         <!--col-->
         <div class="col-md">

@@ -93,6 +93,29 @@
                          <small *ngIf="pass.errors?.required">Field is required</small>
                      </div>
                 </div>
+
+                 <!-- input interest -->
+                 <div class="md-form formInput">
+                  <i class="fa fa-lock prefix"></i>
+                  <label for="role">Your Interest</label>
+                  <select
+                    name="role"
+                    id="role"
+                    class="form-control"
+                    [(ngModel)]="model.role"
+                    #role = "ngModel"
+                    [ngClass]= "{ 'is-invalid': f.submitted && role.invalid}"
+                    required
+                  >
+                    <option value="Buy">Buy Medicine</option>
+                    <option value="Sell">Sell Medicine</option>
+                  </select>
+    
+                   <div *ngIf="f.submitted && role.invalid" class="invalid-input">
+                       <small *ngIf="role.errors?.required">Field is required</small>
+                   </div>
+              </div>
+
                 <!-- button -->
                 <div class="text-center " style="margin: auto">
                      <button class="btn btn-primary" type="submit" name="submit">Register</button>
@@ -101,6 +124,14 @@
                      <div class="text-center " style="margin: auto;color: black; font-weight: bold;">
                               <p routerLink="/login">Already have an account? Login</p>
                   </div>
+
+                    <!--spinner/loader-->
+                    <div *ngIf="spinnerShown" class="d-flex justify-content-center">
+                      <div  class="spinner-border text-success" role="status">
+                        <span class="sr-only">Logging you in...</span>
+                      </div>
+                  </div>
+
                 <div>
                     <small *ngIf="successMessage" class="text-success">{{successMessage}}</small>
                     <small *ngIf="errorMessage"class="text-danger">{{errorMessage}}</small>

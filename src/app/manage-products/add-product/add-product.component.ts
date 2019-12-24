@@ -37,6 +37,9 @@ export class AddProductComponent implements OnInit {
    @ViewChild("f",{
     static:false
   })form:NgForm
+
+  //used to hide and show spinner 
+  spinnerShown:boolean = false;
  
   constructor(private router:Router,private service:ManageProductsService) { }
 
@@ -67,6 +70,10 @@ export class AddProductComponent implements OnInit {
      return this.imageError = "Please pick an image"
 
     }else{
+
+      //show the spinner
+      this.spinnerShown = true;
+
       //remove the error
       this.imageError = ""   
       //get the user id and convert it to an integer/number  
@@ -76,17 +83,21 @@ export class AddProductComponent implements OnInit {
       this.service.addProduct(this.model,this.selectedFile)
       .subscribe(
         res=>{  
+          //hide spinner
+          this.spinnerShown = false;
+
           if(res === "Product exists !")
           {
             this.errorMessage = res
           }else{
             this.successMessage = res
             this.errorMessage = null
-            this.form.reset()
+            this.form.resetForm();
             this.imageName = '' 
           }
         },
         error=>{
+          this.spinnerShown = false;
           console.log("addProduct error: "+ error.message);
         }
       );

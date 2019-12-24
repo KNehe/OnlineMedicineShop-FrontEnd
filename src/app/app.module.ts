@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+ 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,10 +18,8 @@ import { ViewOrdersComponent } from './manage-products/view-orders/view-orders.c
 import { SettingsComponent } from './manage-products/settings/settings.component';
 import { AddProductComponent } from './manage-products/add-product/add-product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule, MatButtonModule, MatSnackBarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatCardModule} from '@angular/material';
-import { EditDialogComponent } from './manage-products/edit-dialog/edit-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RegisterComponent } from './register/register.component';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
@@ -34,6 +33,12 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CustomHttpInterceptor } from './Guards/httpInterceptor';
 import {DataTablesModule} from 'angular-datatables'
 import { ManageProductsService } from './Services/manage-products.service';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { StatisticsComponent } from './manage-products/statistics/statistics.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 
 
@@ -51,8 +56,13 @@ const appRoutes:Routes = [
   children:[
     {
       path:'',
-      component:AllProductsComponent,
+      component:StatisticsComponent,
       pathMatch:'full',
+      outlet:'rightdiv'
+    },
+    {
+      path:'manageproducts',
+      component:AllProductsComponent,
       outlet:'rightdiv'
     },
     {
@@ -118,11 +128,13 @@ canActivate:[DeactivateGuard]
     ViewOrdersComponent,
     SettingsComponent,
     AddProductComponent,
-    DialogComponent,
-    EditDialogComponent,
     ShoppingCartComponent,
     RegisterComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    ConfirmModalComponent,
+    EditModalComponent,
+    DeleteModalComponent,
+    StatisticsComponent
     ],
   imports: [
     BrowserModule,
@@ -145,7 +157,8 @@ canActivate:[DeactivateGuard]
     MatIconModule,
     FontAwesomeModule,
     MDBBootstrapModule.forRoot(),
-    DataTablesModule
+    DataTablesModule,
+    FlexLayoutModule
   ],
   schemas:[NO_ERRORS_SCHEMA],
   providers: [
@@ -160,7 +173,7 @@ canActivate:[DeactivateGuard]
      }
     ],
   bootstrap: [AppComponent],
-  entryComponents:[DialogComponent,EditDialogComponent],
+  entryComponents:[DeleteModalComponent,EditModalComponent,ConfirmModalComponent],
   
 })
 export class AppModule { }
