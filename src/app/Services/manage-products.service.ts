@@ -23,133 +23,89 @@ export class ManageProductsService {
   //add product
   addProduct(product:Product,file:File) :Observable<any>
   {   
-      const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken"),
-      ProductId : ''+0,
-      ProductName: '' + product.name,
-      ProductPrice: ''+product.price,
-      AddedBy: ''+product.user.id
-    })
-
       let formData = new FormData();
       formData.append("file",file);
 
-    return this.httpClient.post<any>(this.base_url+"/api/addProduct",formData,{headers});
+    return this.httpClient.post<any>(this.base_url+"/api/addProduct?ProductName="+product.name 
+           +"&ProductPrice="+product.price 
+           + "&AddedBy="+product.user.id ,formData);
     
   }
 
   //get all products for Admins
   getAllProducts(page:number) : Observable<Product[]>
    {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")
-    });
-    
     const userId = localStorage.getItem("userid");
 
-    return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts?page="+page + "&hash="+userId,{headers});
+    return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts?page="+page + "&hash="+userId);
 
    }
 
     //get all products for users
   getAllProducts2(page:number) : Observable<Product[]>
-  {
-   const headers = new HttpHeaders({
-     Authorization: 'Bearer ' + localStorage.getItem("authToken")
-   });
-   
-   const userId = localStorage.getItem("userid");
-
-   return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts2?page="+page,{headers});
+  {   
+   return this.httpClient.get<Product[]>(this.base_url+"/api/allProducts2?page="+page);
 
   }
 
   //delete a product
   deleteProduct(id:number) : Observable<String> 
   {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-
-     return this.httpClient.delete<String>(this.base_url+"/api/deleteProduct/"+id,{headers});
+     return this.httpClient.delete<String>(this.base_url+"/api/deleteProduct/"+id);
   }
 
     //edit product
     //takes a file
   editProduct1(product:Product,file:File) :Observable<any>
-    {   
-     
-        const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken"),
-        ProductId: '' + product.id,
-        ProductName: '' + product.name,
-        ProductPrice: ''+product.price,
-        AddedBy: ''+product.user.id
-      })
-
+    {
         let formData = new FormData();
         formData.append("file",file);
-        console.log(headers);
-  
-      return this.httpClient.post<any>(this.base_url+"/api/editProduct1",formData,{headers});
+      
+      return this.httpClient.post<any>(this.base_url+"/api/editProduct1?ProductId="+product.id
+             + "&ProductName="+ product.name
+             + "&ProductPrice="+ product.price
+             + "&AddedBy="+ product.user.id ,formData);
       
     }
 
     //editproduct
     //takes only a product,file is included as bytes in the product Object
-    editProduct2(product:Product) :Observable<any>
+   editProduct2(product:Product) :Observable<any>
     {  
-      const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-      return this.httpClient.post<any>(this.base_url+"/api/editProduct2",product,{headers});
+      return this.httpClient.post<any>(this.base_url+"/api/editProduct2",product);
       
     }
 
     //send purchased items to backend
     sendPurchase(purchase:Purchase,cardNumber:String,expiryMonth:string,expiryYear:string,cvc:string,amount:String) : Observable<any>
-    { 
-      const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken"),
-        cardNumber: ''+cardNumber,
-        month:''+expiryMonth,
-        year:''+expiryYear,
-        cvc:''+cvc,
-        amount:''+amount      
-      })
-
-      return this.httpClient.post<any>(this.base_url+"/api/purchase",purchase,{headers});
+    {
+      return this.httpClient.post<any>(this.base_url+"/api/purchase?cardNumber="+cardNumber
+              + "&month="+expiryMonth
+              + "&year="+expiryYear
+              + "&cvc="+ cvc
+              + "&amount="+ amount ,purchase);
     }
 
      //get purchased items to backend
      getAllPurchases() : Observable<Orders[]>
      {
-      const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")
-      });
-      
       let hash = localStorage.getItem("userid");
-       return this.httpClient.get<Orders[]>(this.base_url+"/api/getAllPurchases?hash="+hash,{headers});
+       return this.httpClient.get<Orders[]>(this.base_url+"/api/getAllPurchases?hash="+hash);
      }
 
      //updatePurchaseStatus
      updatePurchaseStatus(order:Orders) : Observable<String>
      {
-      const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")
-      });
-
-      return this.httpClient.put<String>(this.base_url+"/api/updatePurchaseStatus",order,{headers});
+      return this.httpClient.put<String>(this.base_url+"/api/updatePurchaseStatus",order);
      }
 
      //get statisitcs
      getStatistics(): Observable<Statistics>
      {
-      const headers = new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem("authToken")
-      });
 
       let hash = localStorage.getItem("userid");
 
-      return this.httpClient.get<Statistics>(this.base_url+"/api/statistics?hash="+hash,{headers});
+      return this.httpClient.get<Statistics>(this.base_url+"/api/statistics?hash="+hash);
 
      }
 

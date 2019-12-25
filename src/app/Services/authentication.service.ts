@@ -36,9 +36,7 @@ export class AuthenticationService {
   //get details -> role,id,firstname
   getUserDetails() : Observable<LoginViewModel>
   {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-    return this.httpClient.get<LoginViewModel>(this.base_url+"/api/getDetails",{headers});
+    return this.httpClient.get<LoginViewModel>(this.base_url+"/api/getDetails");
     
   }
 
@@ -93,28 +91,19 @@ export class AuthenticationService {
   //change password
   changePassword(model:ChangePasswordModel):Observable<string>
   {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-
-    return this.httpClient.post<string>(this.base_url+"/api/changePassword",model,{headers});
+    return this.httpClient.post<string>(this.base_url+"/api/changePassword",model);
   }
 
   getUserById():Observable<User>
   {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-
-      let userId = parseInt(localStorage.getItem("userid"));
+    let userId = parseInt(localStorage.getItem("userid"));
       
-    return this.httpClient.get<User>(this.base_url+"/api/getOneUser?userId="+userId,{headers})
+    return this.httpClient.get<User>(this.base_url+"/api/getOneUser?userId="+userId)
   }
 
   updateUser(user:User):Observable<string>
-  {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
-      
-    return this.httpClient.post<string>(this.base_url+"/api/updateUser",user,{headers});
+  {      
+    return this.httpClient.post<string>(this.base_url+"/api/updateUser",user);
   }
 
 

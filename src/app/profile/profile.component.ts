@@ -128,9 +128,8 @@ export class ProfileComponent implements OnInit {
 
   //trigger clicks on form input
   //to make content visible and push labels up
-  triggerClick()
+  triggerClick() //not working
   { 
-    alert("k");
     let el1: HTMLElement = this.input1.nativeElement;
     el1.click();
   }
