@@ -99,6 +99,24 @@ export class AuthenticationService {
     return this.httpClient.post<string>(this.base_url+"/api/changePassword",model,{headers});
   }
 
+  getUserById():Observable<User>
+  {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
+
+      let userId = parseInt(localStorage.getItem("userid"));
+      
+    return this.httpClient.get<User>(this.base_url+"/api/getOneUser?userId="+userId,{headers})
+  }
+
+  updateUser(user:User):Observable<string>
+  {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem("authToken")})
+      
+    return this.httpClient.post<string>(this.base_url+"/api/updateUser",user,{headers});
+  }
+
 
 
   //--will be used to display userName on navbar

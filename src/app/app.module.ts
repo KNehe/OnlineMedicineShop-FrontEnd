@@ -96,12 +96,14 @@ canActivate:[DeactivateGuard]
 {
   path:'shoppingcart',
   component:ShoppingCartComponent,
-  canActivate:[ShoppingCartGuardGuard],
+  canActivate:[ShoppingCartGuardGuard],//guard applies to  users
   data:{expectedRole:"USER"}
 },
 {
   path:'checkout',
-  component:CheckOutComponent
+  component:CheckOutComponent,
+  canActivate:[ShoppingCartGuardGuard],
+  data:{expectedRole:"USER"}
 },
 {
   path:'logout',
@@ -109,7 +111,9 @@ canActivate:[DeactivateGuard]
 },
 {
   path:'profile',
-  component:ProfileComponent
+  component:ProfileComponent,
+  canActivate:[ShoppingCartGuardGuard],
+  data:{expectedRole:"USER"}
 },
 {
   path:'**',

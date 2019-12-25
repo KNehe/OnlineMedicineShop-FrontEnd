@@ -1,1 +1,229 @@
-<p>profile works!</p>
+<!--container-->
+<div class="text-font container" style="margin-top:90px; margin-bottom: 500px;">
+
+    
+
+     <!--row-->
+     <div class="row">
+        <!--col-->
+        <div class="col-md">
+            <h4 class="text-center">Profile</h4>
+        </div>
+        <!--col-->
+    </div>
+    <!--row-->
+
+
+    <!--row-->
+    <div class="row">
+        <!--col-->
+        <div class="col-md">
+            <!--spinner/loader-->
+            <div *ngIf="spinnerShown" class="d-flex justify-content-center" style="height: 60px;">
+                <div  class="spinner-border text-success" role="status">
+                <span class="sr-only">Logging you in...</span>
+                </div>
+            </div>
+        </div>
+        <!--col-->
+    </div>
+    <!--row-->
+
+
+     <!--row-->
+     <div class="row">
+        
+        <!--col-->
+        <div class="col-md"></div>
+        <!--col-->
+
+        <!--col-->
+        <div class="col-md-6 z-depth-1-half">
+
+            <!--form-->
+            <form #f = "ngForm" (ngSubmit)="f.valid && save()">
+                
+                <span *ngIf="errorMessage">
+                    <small class="text-danger text-center">
+                    {{errorMessage}}
+                   </small>
+               </span>
+
+               <span *ngIf="succesMessage">
+                <small class="text-success text-center">
+                {{succesMessage}}
+               </small>
+           </span>
+
+               <!-- input firstName -->
+              <div class="md-form formInput">
+                <mdb-icon icon="envelope" style="green"></mdb-icon>
+                <label for="firstName">Your First Name</label>
+                <input type="text" name="firstName" id="firstName" class="form-control"
+                [(ngModel)]="model.firstName"
+                #firstName = "ngModel"
+                [ngClass]="{ 'is-invalid': firstName.invalid}"
+                required
+                />
+                 <div *ngIf="f.submitted || firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid-input">
+                    <small *ngIf="firstName.errors?.required">Field is required</small>
+                 </div>     
+            </div>
+
+               <!-- input lastName -->
+               <div class="md-form formInput">
+                <mdb-icon icon="envelope" style="green"></mdb-icon>
+                <label for="lastName">Your Last Name</label>
+                <input type="text" name="lastName" id="lastName" class="form-control"
+                [(ngModel)]="model.lastName"
+                #lastName = "ngModel"
+                [ngClass]="{ 'is-invalid': lastName.invalid}"
+                required
+
+                />
+                 <div *ngIf="f.submitted || lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid-input">
+                    <small *ngIf="lastName.errors?.required">Field is required</small>
+                 </div>     
+              </div>
+              
+               <!-- input phone -->
+               <div class="md-form formInput">
+                <mdb-icon icon="envelope" style="green"></mdb-icon>
+                <label for="phone">Your Phone Number</label>
+                <input type="text" name="phone" id="phone" class="form-control"
+                [(ngModel)]="model.phone"
+                #phone = "ngModel"
+                [ngClass]="{ 'is-invalid': phone.invalid}"
+                required
+                />
+                 <div *ngIf="f.submitted || phone.invalid && (phone.dirty || phone.touched)" class="invalid-input">
+                    <small *ngIf="phone.errors?.required">Field is required</small>
+                 </div>     
+              </div>
+
+              
+
+                 <!-- input email -->
+              <div class="md-form formInput">
+                <i class="fa fa-envelope prefix"></i>
+                <label for="email">Your email</label>
+                <input type="email" name="email" id="email" class="form-control"
+                [(ngModel)]="model.email"
+                #email = "ngModel"
+                [ngClass]="{ 'is-invalid': email.invalid}"
+                required email
+                />
+                 <div *ngIf="f.submitted || email.invalid && (email.dirty || email.touched)" class="invalid-input">
+                    <small *ngIf="email.errors?.required">Field is required</small>
+                    <small *ngIf="email.errors?.email">Field is not an email</small>
+                 </div>     
+            </div>
+
+            
+             <div style="padding:5px;">
+                <button
+                type="submit" 
+                name="submit"
+                mdbBtn 
+                block="true" 
+                class="btn-success"
+               >
+               Apply Changes             
+               </button>
+             </div>
+
+            </form>
+            <!--form-->
+
+              
+        </div>
+        <!--col-->
+
+        <!--col-->
+        <div class="col-md"></div>
+        <!--col-->
+    </div>
+    <!--row-->
+
+
+
+    <!--row-->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md"></div>
+
+         <!--col-->
+         <div class="col-md-6  z-depth-1-half">
+              <!--form passwprd change-->
+              <form #fm = "ngForm" (ngSubmit)="fm.valid && changePasword()">
+                <h5 class="text-center">Change Password</h5>
+                
+                <span *ngIf="passwordErrorMessage">
+                    <small class="text-danger text-center">
+                    {{passwordErrorMessage}}
+                   </small>
+               </span>
+
+               <span *ngIf="passwordSuccesMessage">
+                    <small class="text-success text-center">
+                    {{passwordSuccesMessage}}
+                </small>
+               </span>
+
+               <!-- input password -->
+               <div class="md-form formInput">
+                <mdb-icon icon="envelope" class="green"></mdb-icon>
+                <label for="newPassword">New Password</label>
+                <input type="password" name="newPassword" id="newPassword" class="form-control"
+                [(ngModel)]="passModel.newPassword"
+                #newPassword = "ngModel"
+                [ngClass]="{ 'is-invalid': newPassword.invalid}"
+                required
+                length="6"
+                />
+                 <div *ngIf="fm.submitted || newPassword.invalid && (newPassword.dirty || newPassword.touched)" class="invalid-input">
+                    <small *ngIf="newPassword.errors?.required">Field is required</small>
+                    <small *ngIf="newPassword.errors?.length">Should at least 6 characters</small>
+                 </div>     
+              </div>
+
+                <!-- input password -->
+               <div class="md-form formInput">
+                <mdb-icon icon="envelope" class="green"></mdb-icon>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+                [(ngModel)]="passModel.confirmPassword"
+                #confirmPassword = "ngModel"
+                [ngClass]="{ 'is-invalid': confirmPassword.invalid}"
+                required
+                length="6"
+                />
+                 <div *ngIf="fm.submitted || confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="invalid-input">
+                    <small *ngIf="confirmPassword.errors?.required">Field is required</small>
+                    <small *ngIf="confirmPassword.errors?.length">Should at least 6 characters</small>
+                 </div>     
+              </div>
+
+              
+             <div style="padding:5px;">
+                <button
+                type="submit" 
+                name="submit2"
+                mdbBtn 
+                block="true" 
+                class="btn-success"
+               >
+               Apply Changes             
+               </button>
+             </div>
+
+            </form>
+            <!--form-->
+         </div>
+         <!--col-->
+
+        <div class="col-md"></div>
+    </div>
+    <!--row-->
+
+</div>
+<!--container-->
