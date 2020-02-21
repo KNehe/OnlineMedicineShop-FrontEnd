@@ -5,6 +5,8 @@ import { AppModule } from '../app.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { MdbCardImageComponent, MdbCardBodyComponent, MdbCardComponent, MdbCardTitleComponent, MdbCardTextComponent } from 'angular-bootstrap-md';
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
@@ -12,7 +14,7 @@ describe('ShoppingCartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShoppingCartComponent ],
+      declarations: [ ShoppingCartComponent,FaIconComponent,MdbCardImageComponent,MdbCardBodyComponent,MdbCardComponent,MdbCardTitleComponent,MdbCardTextComponent ],
       providers:[AppModule],
       imports:[HttpClientModule,MatSnackBarModule,RouterModule.forRoot([])]
     })

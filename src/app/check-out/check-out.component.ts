@@ -16,7 +16,7 @@ export class CheckOutComponent implements OnInit {
   
   cart:Product[] = []
 
-  totalPrice:number = null
+  totalPrice:number = 0;
 
   //credit card data
   creditCard: CreditCard ={
@@ -68,8 +68,9 @@ export class CheckOutComponent implements OnInit {
     this.cart.forEach(
       item=>{
         this.totalPrice += parseInt(item.price)
-      })
+      });
   }
+
 
   removeFromCart(item:Product):void
   {  

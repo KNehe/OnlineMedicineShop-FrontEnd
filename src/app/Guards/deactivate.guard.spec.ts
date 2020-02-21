@@ -1,11 +1,14 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
 import { DeactivateGuard } from './deactivate.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('DeactivateGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DeactivateGuard]
+      providers: [DeactivateGuard],
+      imports:[HttpClientModule,RouterModule.forRoot([])]
     });
   });
 

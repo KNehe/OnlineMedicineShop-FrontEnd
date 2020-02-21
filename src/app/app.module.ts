@@ -28,7 +28,7 @@ import { ShoppingCartGuardGuard } from './Guards/shopping-cart-guard.guard';
 import { AuthenticationService } from './Services/authentication.service';
 import { DeactivateGuard } from './Guards/deactivate.guard';
 import { CheckOutComponent } from './check-out/check-out.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CustomHttpInterceptor } from './Guards/httpInterceptor';
 import {DataTablesModule} from 'angular-datatables'

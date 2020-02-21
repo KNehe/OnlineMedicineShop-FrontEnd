@@ -1,11 +1,14 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
 import { ShoppingCartGuardGuard } from './shopping-cart-guard.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('ShoppingCartGuardGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ShoppingCartGuardGuard]
+      providers: [ShoppingCartGuardGuard],
+      imports:[HttpClientModule,RouterModule.forRoot([])]
     });
   });
 
